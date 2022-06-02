@@ -5,12 +5,15 @@ class myDB {
   static Future<Database> initDatabase() async {
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'bob.db');
-    Database db = await openDatabase(path, version: 3,
+    Database db = await openDatabase(path, version: 4,
         onCreate: (Database db, int version) async {
       await db.execute('''
             CREATE TABLE IF NOT EXISTS City( 
                   id primary key,
-                  name varchar(255) not null
+                  name varchar(255) not null,
+                  lat integer not null,
+                  lon integer not null,
+                  contry varchar(255) not null
               );
           ''');
     });
