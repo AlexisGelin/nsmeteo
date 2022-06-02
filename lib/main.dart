@@ -27,6 +27,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: Center());
+    return Scaffold(
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+            ///
+            //////////////////////// Header
+            ///
+
+            Text("Météo",
+                style: TextStyle(
+                    fontFamily: 'Lexend',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32)),
+
+            ///
+            //////////////////////// Température par heure
+            ///
+            
+
+            ///
+            //////////////////////// Température pour les 5 jours
+            ///
+          ])),
+    );
   }
 }
