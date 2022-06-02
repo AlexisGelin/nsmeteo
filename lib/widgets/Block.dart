@@ -7,6 +7,6 @@ class BlockSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(width: 20.0);
+    return const SizedBox(width: 20.0,height: 20,);
   }
 }

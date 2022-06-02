@@ -10,6 +10,7 @@ const secondaryColor = Color.fromRGBO(27, 73, 101, 1);
 const thirdColor = Color.fromRGBO(202, 233, 255, 1);
 
 const backgroundTransparent = Color.fromRGBO(27, 73, 101, 0.3);
+const navbarColor = Color.fromRGBO(108, 165, 205, 1);
 
 ThemeData buildTheme(BuildContext context) {
   return ThemeData(
@@ -22,7 +23,8 @@ ThemeData buildTheme(BuildContext context) {
         secondaryContainer: backgroundTransparent,
         tertiary: thirdColor,
         onPrimary: normalTextColor,
-        onTertiary: placeholderColor),
+        onTertiary: placeholderColor,
+        primaryContainer: navbarColor),
     textTheme: Theme.of(context).textTheme.copyWith(
           titleLarge: TextStyle(
               fontSize: 64,
