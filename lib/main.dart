@@ -147,6 +147,7 @@ class _OneCityScreenState extends State<OneCityScreen> {
 ///
 ////// Page Une ville
 ///
+var _controller = TextEditingController();
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({Key? key}) : super(key: key);
@@ -172,35 +173,31 @@ class SecondScreen extends StatelessWidget {
             ///
             BlockSmall(),
 
-
             Text("NSMétéo", style: Theme.of(context).textTheme.titleMedium),
 
             ///
             ////// SearchBar
             ///
+            ///
+
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
+                controller: _controller,
                 style: Theme.of(context).textTheme.labelSmall,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      onPressed: _controller.clear,
+                      icon: const Icon(Icons.search),
+                    ),
+                    border: const OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.onTertiary)),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onTertiary),
+                    ),
                     labelText: 'Rechercher une ville',
                     labelStyle: Theme.of(context).textTheme.labelSmall),
               ),
-            ),
-
-            ///
-            ////// Liste des villes
-            ///
-
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/ville');
-              },
-              child: const Icon(Icons.search),
             ),
 
             ///
