@@ -4,34 +4,36 @@ import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/services/meteoService.dart';
 import 'package:nsmeteo/widgets/CurrentWeatherBox.dart';
 
-class CurrentWeatherBuilder extends StatefulWidget {
+import '../models/futureWeatherData.dart';
+import 'FutureWeatherBox.dart';
+
+class FutureWeatherBuilder extends StatefulWidget {
   final cityModel city;
-  const CurrentWeatherBuilder({Key? key, required this.city}) : super(key: key);
+  const FutureWeatherBuilder({Key? key, required this.city}) : super(key: key);
 
   @override
-  State<CurrentWeatherBuilder> createState() =>
-      CurrentWeatherBuilderState(city);
+  State<FutureWeatherBuilder> createState() => FutureWeatherBuilderState(city);
 }
 
-class CurrentWeatherBuilderState extends State<CurrentWeatherBuilder> {
+class FutureWeatherBuilderState extends State<FutureWeatherBuilder> {
   cityModel city;
 
-  CurrentWeatherBuilderState(this.city);
-  late final Future<CurrentWeatherData> cW;
+  FutureWeatherBuilderState(this.city);
+  late final Future<FutureWeatherData> cW;
 
   @override
   void initState() {
-    cW = meteoService.requestCurrentMeteoData(city, "metric");
+    cW = meteoService.requestFutureMeteoData(city, "metric");
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<CurrentWeatherData>(
+    return FutureBuilder<FutureWeatherData>(
       future: cW,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return CurrentWeatherBox(cWeatherData: snapshot.data!);
+          return FutureWeatherBox(fWeatherData: snapshot.data!);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }

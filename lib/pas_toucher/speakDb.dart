@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text("City"),
                 onPressed: () {
                   setState(() {
-                    myDB.insertDB(db, controll.text);
+                    // myDB.insertDB(db, controll.text);
                     myDB.getDB(db).then((value) {
                       setState(() {
                         list = value;

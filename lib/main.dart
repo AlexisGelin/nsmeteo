@@ -4,6 +4,8 @@ import 'package:nsmeteo/utils/UiColor.dart';
 import 'package:nsmeteo/widgets/CurrentWeatherBuilder.dart';
 import 'dart:ui';
 
+import 'package:nsmeteo/widgets/FutureWeatherBuilder.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -33,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         // appBar: AppBar(),
-        body: CurrentWeatherBuilder(city: cityModel("lyon", 45.7, 4.8, "FR")),
+        body: FutureWeatherBuilder(city: cityModel("lyon", 45.7, 4.8, "FR")),
         backgroundColor: UiColor.HexaColor("#5FA8D3"));
   }
 }

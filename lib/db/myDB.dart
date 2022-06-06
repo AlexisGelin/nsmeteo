@@ -1,3 +1,4 @@
+import 'package:nsmeteo/models/cityModel.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -13,7 +14,7 @@ class myDB {
                   name varchar(255) not null,
                   lat integer not null,
                   lon integer not null,
-                  contry varchar(255) not null
+                  country varchar(255) not null
               );
           ''');
     });
@@ -25,9 +26,11 @@ class myDB {
     return list;
   }
 
-  static Future<void> insertDB(Database db, String cityName) async {
+  static Future<void> insertDB(Database db, cityModel City) async {
     await db.transaction((txn) async {
-      await txn.rawInsert('INSERT INTO City(name) VALUES(?)', [cityName]);
+      await txn.rawInsert(
+          'INSERT INTO City(name, lat, lon, country) VALUES(?, ?, ?, ?)',
+          [City.name, City.lat, City.lon, City.country]);
     });
   }
 
