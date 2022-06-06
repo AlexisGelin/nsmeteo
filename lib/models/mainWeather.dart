@@ -1,11 +1,41 @@
-class mainWeather {
-  late double temp;
-  late double feels_like;
-  late double temp_min;
-  late double temp_max;
-  late double pressure;
-  late double humidity;
+class Main {
+  double? temp;
+  double? feelsLike;
+  double? tempMin;
+  double? tempMax;
+  int? pressure;
+  int? humidity;
 
-  mainWeather(this.temp, this.feels_like, this.temp_min, this.temp_max,
-      this.pressure, this.humidity);
+  Main(
+      {this.temp,
+      this.feelsLike,
+      this.tempMin,
+      this.tempMax,
+      this.pressure,
+      this.humidity});
+
+  Main.fromJson(Map<String, dynamic> json) {
+    temp = json['temp'];
+    feelsLike = json['feels_like'];
+    tempMin = json['temp_min'];
+    tempMax = json['temp_max'];
+    pressure = json['pressure'];
+    humidity = json['humidity'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['temp'] = this.temp;
+    data['feels_like'] = this.feelsLike;
+    data['temp_min'] = this.tempMin;
+    data['temp_max'] = this.tempMax;
+    data['pressure'] = this.pressure;
+    data['humidity'] = this.humidity;
+    return data;
+  }
+
+  @override
+  String toString() {
+    return 'temp : $temp \n feelsLike : $feelsLike \n tempMin : $tempMin \n tempMax : $tempMax \n pressure : $pressure \n sunset : $humidity';
+  }
 }

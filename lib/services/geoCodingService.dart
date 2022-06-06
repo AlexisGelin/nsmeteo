@@ -4,16 +4,17 @@ import 'package:nsmeteo/models/cityModel.dart';
 import 'package:http/http.dart' as http;
 
 class geoCodingService {
-  static Future<List<cityModel>> getCityData(String city) async {
+  static Future<cityModel> getCityData(String city) async {
     List<cityModel> cityModelsList = [];
 
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
-    var url = Uri.https("api.openweathermap.org", "/geo/1.0/direct", {
+    var url = Uri.http("api.openweathermap.org", "/geo/1.0/direct", {
       'q': city,
       'limit': "50",
       'appid': 'e6f4a7d38ed14b86bb576f01ec00b341'
     });
+
     var response = await http.get(url);
 
     var contryList = await getContryNameByCode();
@@ -26,7 +27,7 @@ class geoCodingService {
         cityModelsList.add(citymodel);
       }
     }
-    return cityModelsList;
+    return cityModelsList[0];
   }
 
   static dynamic getContryNameByCode() async {
