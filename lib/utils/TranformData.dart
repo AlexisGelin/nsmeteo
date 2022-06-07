@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 
 class TransformData {
   static List<List<dynamic>> MinMaxByDays(FutureWeatherData fWeatherData) {
-    int currentDay = 0;
+    num currentDay = 0;
     String? currentDayTxt = "";
-    List<int> tempDay = [];
+    List<num> tempDay = [];
     List<dynamic> MinMaxDay = [];
     List<List<dynamic>> result = [];
     fWeatherData.list!.forEach((element) {
