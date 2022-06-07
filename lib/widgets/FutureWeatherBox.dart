@@ -87,53 +87,57 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
               color: Theme.of(context).colorScheme.secondaryContainer,
             ),
             child: SizedBox(
-              height: 200,
-              width: 300,
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  String txt;
-                  if (index == 0) {
-                    txt = "Auj.";
-                  } else {
-                    txt = TransformData.ConvertDayInFrench(
-                        "${MaxMinDay[index][2]}");
-                  }
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 40,
-                        width: 300,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Text(
-                              txt,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "${MaxMinDay[index][0]} °",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "${MaxMinDay[index][1]} °",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                          ],
+              height: 230,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    String txt;
+                    if (index == 0) {
+                      txt = "Auj.";
+                    } else {
+                      txt = TransformData.ConvertDayInFrench(
+                          "${MaxMinDay[index][2]}");
+                    }
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 40,
+                          width: 300,
+                          child: ListView(
+                            
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              Text(
+                                txt,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                "${MaxMinDay[index][0]} °",
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                "${MaxMinDay[index][1]} °",
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: MaxMinDay.length,
+                      ],
+                    );
+                  },
+                  itemCount: MaxMinDay.length,
+                ),
               ),
             ),
           ),

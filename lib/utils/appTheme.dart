@@ -9,7 +9,7 @@ const primaryColor = Color.fromRGBO(95, 168, 211, 1);
 const secondaryColor = Color.fromRGBO(27, 73, 101, 1);
 const thirdColor = Color.fromRGBO(202, 233, 255, 1);
 
-const backgroundTransparent = Color.fromRGBO(27, 73, 101, 0.3);
+const backgroundTransparent = Color.fromRGBO(27, 73, 101, 0.6);
 const navbarColor = Color.fromRGBO(108, 165, 205, 1);
 
 ThemeData buildTheme(BuildContext context) {
@@ -32,8 +32,8 @@ ThemeData buildTheme(BuildContext context) {
               shadows: [
                 Shadow(
                     color: Colors.black.withOpacity(0.2),
-                    offset: const Offset(0, 4),
-                    blurRadius: 15)
+                    offset: const Offset(0, 2),
+                    blurRadius: 10)
               ],
               color: ColorScheme.fromSwatch().onPrimary),
           titleMedium: TextStyle(
@@ -42,8 +42,8 @@ ThemeData buildTheme(BuildContext context) {
               shadows: [
                 Shadow(
                     color: Colors.black.withOpacity(0.2),
-                    offset: const Offset(0, 4),
-                    blurRadius: 15)
+                    offset: const Offset(0, 2),
+                    blurRadius: 10)
               ],
               color: ColorScheme.fromSwatch().onPrimary),
           titleSmall: TextStyle(
@@ -51,8 +51,8 @@ ThemeData buildTheme(BuildContext context) {
               shadows: [
                 Shadow(
                     color: Colors.black.withOpacity(0.2),
-                    offset: const Offset(0, 4),
-                    blurRadius: 15)
+                    offset: const Offset(0, 2),
+                    blurRadius: 10)
               ],
               color: ColorScheme.fromSwatch().onPrimary),
           headlineMedium:
