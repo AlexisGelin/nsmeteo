@@ -35,7 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         // appBar: AppBar(),
-        body: FutureWeatherBuilder(city: cityModel("lyon", 45.7, 4.8, "FR")),
+        body: Column(
+          children: [
+            CurrentWeatherBuilder(city: cityModel("lyon", 45.7, 4.8, "FR")),
+            FutureWeatherBuilder(city: cityModel("lyon", 45.7, 4.8, "FR")),
+          ],
+        ),
         backgroundColor: UiColor.HexaColor("#5FA8D3"));
   }
 }

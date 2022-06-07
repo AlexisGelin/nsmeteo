@@ -1,7 +1,7 @@
 class FutureWeatherData {
   String? cod;
-  int? message;
-  int? cnt;
+  num? message;
+  num? cnt;
   List<FutureWeaterList>? list;
   FutureCity? city;
 
@@ -36,12 +36,12 @@ class FutureWeatherData {
 }
 
 class FutureWeaterList {
-  int? dt;
+  num? dt;
   FutureMainWather? main;
   List<FutureWeather>? weather;
   FutureClouds? clouds;
   FutureWind? wind;
-  int? visibility;
+  num? visibility;
   num? pop;
   FutureSys? sys;
   String? dtTxt;
@@ -104,10 +104,10 @@ class FutureWeaterList {
 }
 
 class FutureMainWather {
-  double? temp;
-  double? feelsLike;
-  double? tempMin;
-  double? tempMax;
+  num? temp;
+  num? feelsLike;
+  num? tempMin;
+  num? tempMax;
   int? pressure;
   int? seaLevel;
   int? grndLevel;
@@ -153,7 +153,7 @@ class FutureMainWather {
 }
 
 class FutureWeather {
-  int? id;
+  num? id;
   String? main;
   String? description;
   String? icon;
@@ -178,7 +178,7 @@ class FutureWeather {
 }
 
 class FutureClouds {
-  int? all;
+  num? all;
 
   FutureClouds({this.all});
 
@@ -194,9 +194,9 @@ class FutureClouds {
 }
 
 class FutureWind {
-  double? speed;
-  int? deg;
-  double? gust;
+  num? speed;
+  num? deg;
+  num? gust;
 
   FutureWind({this.speed, this.deg, this.gust});
 
@@ -232,14 +232,14 @@ class FutureSys {
 }
 
 class FutureCity {
-  int? id;
+  num? id;
   String? name;
   FutureCoord? coord;
   String? country;
-  int? population;
-  int? timezone;
-  int? sunrise;
-  int? sunset;
+  num? population;
+  num? timezone;
+  num? sunrise;
+  num? sunset;
 
   FutureCity(
       {this.id,
@@ -280,8 +280,8 @@ class FutureCity {
 }
 
 class FutureCoord {
-  double? lat;
-  double? lon;
+  num? lat;
+  num? lon;
 
   FutureCoord({this.lat, this.lon});
 
