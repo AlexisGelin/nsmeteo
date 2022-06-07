@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
-import 'package:nsmeteo/utils/UiColor.dart';
+import 'package:nsmeteo/utils/Ui.dart';
 import 'package:nsmeteo/widgets/CurrentWeatherBuilder.dart';
 import 'dart:ui';
 
@@ -117,7 +117,6 @@ class _AllCitySlider extends State<AllCitySlider> {
           final double height = MediaQuery.of(context).size.height;
           return CarouselSlider(
             options: CarouselOptions(
-              
               height: height,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
