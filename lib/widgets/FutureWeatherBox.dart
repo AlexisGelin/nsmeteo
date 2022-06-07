@@ -20,11 +20,6 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
     this.MaxMinDay = TransformData.MinMaxByDays(fWeatherData);
   }
 
-  // void initState() {
-  //   super.initState();
-  //   MaxMinDay ;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Column(
