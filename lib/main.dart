@@ -117,6 +117,7 @@ class _AllCitySlider extends State<AllCitySlider> {
           final double height = MediaQuery.of(context).size.height;
           return CarouselSlider(
             options: CarouselOptions(
+              
               height: height,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
@@ -130,7 +131,7 @@ class _AllCitySlider extends State<AllCitySlider> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Column(
+                    child: ListView(
                       children: <Widget>[
                         CurrentWeatherBuilder(
                             city:

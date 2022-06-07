@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
+import 'package:nsmeteo/widgets/Block.dart';
 
 class CurrentWeatherBox extends StatefulWidget {
   final CurrentWeatherData cWeatherData;
@@ -19,41 +20,21 @@ class CurrentWeatherBoxState extends State<CurrentWeatherBox> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 60,
-        ),
+        const BlockSmall(),
         Align(
             alignment: Alignment.topCenter,
             child: Text(
               cWeatherData.name!,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 40,
-                fontFamily: "DMSans",
-                shadows: [
-                  Shadow(
-                      color: Color.fromARGB(108, 0, 0, 0),
-                      offset: Offset(2, 2),
-                      blurRadius: 15),
-                ],
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             )),
         Text(
           "${cWeatherData.main!.temp!.round()}°",
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 60,
-            fontFamily: "DMSans",
-            shadows: [
-              Shadow(
-                  color: Color.fromARGB(108, 0, 0, 0),
-                  offset: Offset(2, 2),
-                  blurRadius: 15),
-            ],
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
+          
         ),
-        const SizedBox(
-          height: 15,
+        Text(
+          "${cWeatherData.weather![0].description}",
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 0.0),
@@ -67,40 +48,17 @@ class CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                   alignment: Alignment.topRight,
                   child: Text(
                     "Min. ${cWeatherData.main!.tempMin!.round()}°",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontFamily: "DMSans",
-                      shadows: [
-                        Shadow(
-                            color: Color.fromARGB(108, 0, 0, 0),
-                            offset: Offset(2, 2),
-                            blurRadius: 15),
-                      ],
-                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
               ),
+              const BlockSmall(),
               SizedBox(
-                width: 20,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2 - 10,
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Max. ${cWeatherData.main!.tempMax!.round()}°",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontFamily: "DMSans",
-                      shadows: [
-                        Shadow(
-                            color: Color.fromARGB(108, 0, 0, 0),
-                            offset: Offset(2, 2),
-                            blurRadius: 15),
-                      ],
-                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
               ),

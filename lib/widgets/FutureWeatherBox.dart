@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
+import 'package:nsmeteo/widgets/Block.dart';
 
 import '../models/futureWeatherData.dart';
 import '../utils/TranformData.dart';
@@ -27,53 +28,47 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
+            height: 145,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).colorScheme.secondaryContainer,
             ),
-            child: Align(
-              child: SizedBox(
-                height: 130,
-                width: 300,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: 50,
-                      child: ListView(children: <Widget>[
-                        Text(
-                          "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    width: 50,
+                    child: ListView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: <Widget>[
+                          Text(
+                            "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h",
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Icon(Icons.abc),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "${fWeatherData.list![index].main!.temp!.round()} °",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 20),
-                        )
-                      ]),
-                    );
-                  },
-                  itemCount: 8,
-                ),
+                          const BlockSmall(),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Icon(Icons.abc),
+                          ),
+                          const BlockSmall(),
+                          Text(
+                            "${fWeatherData.list![index].main!.temp!.round()} °",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          )
+                        ]),
+                  );
+                },
+                itemCount: 8,
               ),
             ),
           ),
         ),
+
+
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
@@ -83,7 +78,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
               color: Theme.of(context).colorScheme.secondaryContainer,
             ),
             child: SizedBox(
-              height: 220,
+              height: 200,
               width: 300,
               child: ListView.builder(
                 itemBuilder: (context, index) {
