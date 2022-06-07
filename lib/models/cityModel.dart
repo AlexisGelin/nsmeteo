@@ -1,7 +1,7 @@
 class cityModel {
   String name;
-  double lat;
-  double lon;
+  num lat;
+  num lon;
   String country;
   cityModel(this.name, this.lat, this.lon, this.country);
 }

@@ -1,10 +1,10 @@
 class Sys {
-  int? type;
-  int? id;
-  double? message;
+  num? type;
+  num? id;
+  num? message;
   String? country;
-  int? sunrise;
-  int? sunset;
+  num? sunrise;
+  num? sunset;
 
   Sys(
       {this.type,

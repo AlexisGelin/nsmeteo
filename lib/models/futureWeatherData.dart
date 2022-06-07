@@ -108,10 +108,10 @@ class FutureMainWather {
   num? feelsLike;
   num? tempMin;
   num? tempMax;
-  int? pressure;
-  int? seaLevel;
-  int? grndLevel;
-  int? humidity;
+  num? pressure;
+  num? seaLevel;
+  num? grndLevel;
+  num? humidity;
   num? tempKf;
 
   FutureMainWather(
