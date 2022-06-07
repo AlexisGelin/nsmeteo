@@ -1,295 +1,295 @@
 {
     "200": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "201": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "202": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "210": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "211": {
-        "icon": "thunderstorm"
+        "icon": "thunder.png"
     },
 
     "212": {
-        "icon": "thunderstorm"
+        "icon": "thunder.png"
     },
 
     "221": {
-        "icon": "thunderstorm"
+        "icon": "thunder.png"
     },
 
     "230": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "231": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "232": {
-        "icon": "storm-showers"
+        "icon": "thunder.png"
     },
 
     "300": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "301": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "302": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "310": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "311": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "312": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "313": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "314": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "321": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "500": {
-        "icon": "rain"
+        "icon": "rain.png"
     },
 
     "501": {
-        "icon": "rain"
+        "icon": "rain.png"
     },
 
     "502": {
-        "icon": "rain"
+        "icon": "rain.png"
     },
 
     "503": {
-        "icon": "rain"
+        "icon": "rain.png"
     },
 
     "504": {
-        "icon": "rain"
+        "icon": "rain.png"
     },
 
     "511": {
 
-        "icon": "rain-mix"
+        "icon": "rain.png"
     },
 
     "520": {
-        "icon": "showers"
+        "icon": "rain.png"
     },
 
     "521": {
-        "icon": "showers"
+        "icon": "rain.png"
     },
 
     "522": {
-        "icon": "showers"
+        "icon": "rain.png"
     },
 
     "531": {
-        "icon": "showers"
+        "icon": "rain.png"
     },
 
     "600": {
-        "icon": "snow"
+        "icon": "snow.png"
     },
 
     "601": {
-        "icon": "snow"
+        "icon": "snow.png"
     },
 
     "602": {
-        "icon": "snow"
+        "icon": "snow.png"
     },
 
     "611": {
-        "icon": "sleet"
+        "icon": "snow.png"
     },
 
     "612": {
-        "icon": "sleet"
+        "icon": "snow.png"
     },
 
     "615": {
-        "icon": "rain-mix"
+        "icon": "rain.png"
     },
 
     "616": {
-        "icon": "rain-mix"
+        "icon": "rain.png"
     },
 
     "620": {
-        "icon": "rain-mix"
+        "icon": "rain.png"
     },
 
     "621": {
-        "icon": "rain-mix"
+        "icon": "rain.png"
     },
 
     "622": {
-        "icon": "rain-mix"
+        "icon": "rain.png"
     },
 
     "701": {
-        "icon": "sprinkle"
+        "icon": "rain.png"
     },
 
     "711": {
-        "icon": "smoke"
+        "icon": "haze.png"
     },
 
     "721": {
-        "icon": "day-haze"
+        "icon": "haze.png"
     },
 
     "731": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "741": {
-        "icon": "fog"
+        "icon": "haze.png"
     },
 
     "751": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "761": {
-        "icon": "dust"
+        "icon": "wind.png"
     },
 
     "762": {
-        "icon": "smog"
+        "icon": "haze.png"
     },
 
     "771": {
-        "icon": "day-windy"
+        "icon": "wind.png"
     },
 
     "781": {
-        "icon": "tornado"
+        "icon": "wind.png"
     },
 
     "800": {
-        "icon": "sunny"
+        "icon": "sun.png"
     },
 
     "801": {
-        "icon": "cloudy"
+        "icon": "cloudysun.png"
     },
 
     "802": {
-        "icon": "cloudy"
+        "icon": "cloudysun.png"
     },
 
     "803": {
-        "icon": "cloudy"
+        "icon": "cloudysun.png"
     },
 
     "804": {
-        "icon": "cloudy"
+        "icon": "cloudysun.png"
     },
 
 
     "900": {
-        "icon": "tornado"
+        "icon": "wind.png"
     },
 
     "901": {
-        "icon": "hurricane"
+        "icon": "wind.png"
     },
 
     "902": {
-        "icon": "hurricane"
+        "icon": "wind.png"
     },
 
     "903": {
-        "icon": "snowflake-cold"
+        "icon": "snow.png"
     },
 
     "904": {
-        "icon": "hot"
+        "icon": "sun.png"
     },
 
     "905": {
-        "icon": "windy"
+        "icon": "wind.png"
     },
 
     "906": {
-        "icon": "hail"
+        "icon": "snow.png"
     },
 
     "951": {
-        "icon": "sunny"
+        "icon": "sun.png"
     },
 
     "952": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "953": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "954": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "955": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "956": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "957": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "958": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "959": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     },
 
     "960": {
-        "icon": "thunderstorm"
+        "icon": "thunder.png"
     },
 
     "961": {
-        "icon": "thunderstorm"
+        "icon": "thunder.png"
     },
 
     "962": {
-        "icon": "cloudy-gusts"
+        "icon": "wind.png"
     }
 }
