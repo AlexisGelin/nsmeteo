@@ -40,13 +40,24 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
+                  String dtt;
+                  if (DateTime.parse("${fWeatherData.list![index].dtTxt}")
+                          .hour <
+                      10) {
+                    dtt =
+                        "0${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
+                  } else {
+                    dtt =
+                        "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
+                  }
+
                   return SizedBox(
                     width: 50,
                     child: ListView(
                         physics: const NeverScrollableScrollPhysics(),
                         children: <Widget>[
                           Text(
-                            "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h",
+                            dtt,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           const BlockSmall(),
@@ -67,8 +78,6 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
             ),
           ),
         ),
-
-
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
