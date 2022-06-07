@@ -29,13 +29,32 @@ ThemeData buildTheme(BuildContext context) {
           titleLarge: TextStyle(
               fontSize: 64,
               fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(0, 4),
+                    blurRadius: 15)
+              ],
               color: ColorScheme.fromSwatch().onPrimary),
           titleMedium: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(0, 4),
+                    blurRadius: 15)
+              ],
               color: ColorScheme.fromSwatch().onPrimary),
           titleSmall: TextStyle(
-              fontSize: 24, color: ColorScheme.fromSwatch().onPrimary),
+              fontSize: 24,
+              shadows: [
+                Shadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(0, 4),
+                    blurRadius: 15)
+              ],
+              color: ColorScheme.fromSwatch().onPrimary),
           headlineMedium:
               TextStyle(fontSize: 16, color: ColorScheme.fromSwatch().tertiary),
           bodyMedium: TextStyle(

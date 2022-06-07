@@ -23,20 +23,31 @@ flutter:
   uses-material-design: true
 
   assets:
+
   # Icones
-    - assets\images\icones\calendar.png
-    - assets\images\icones\carte.png
-    - assets\images\icones\horloge-murale.png
-    - assets\images\icones\liste.png
-    - assets\images\icones\loupe.png
-    - assets\images\icones\plus.png
+    - assets/images/icones/calendar.png
+    - assets/images/icones/carte.png
+    - assets/images/icones/horloge-murale.png
+    - assets/images/icones/liste.png
+    - assets/images/icones/loupe.png
+    - assets/images/icones/plus.png
+
   # Meteo Icones
-    - assets\images\meteoIcones\cloudysun.png
-    - assets\images\meteoIcones\rain.png
-    - assets\images\meteoIcones\snow.png
-    - assets\images\meteoIcones\sun.png
-    - assets\images\meteoIcones\water.png
-    - assets\images\meteoIcones\wind.png
+    - assets/images/meteoIcones/cloudysun.png
+    - assets/images/meteoIcones/rain.png
+    - assets/images/meteoIcones/snow.png
+    - assets/images/meteoIcones/sun.png
+    - assets/images/meteoIcones/water.png
+    - assets/images/meteoIcones/wind.png
+
+  #Background GIF
+    - assets/images/background/thunder.gif
+    - assets/images/background/cloudy.gif
+    - assets/images/background/cloudysun.gif
+    - assets/images/background/rain.gif
+    - assets/images/background/snow.gif
+    - assets/images/background/sunny.gif
+
 
   fonts:
     - family: DMSans
