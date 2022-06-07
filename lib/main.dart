@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: buildTheme(context),
       initialRoute: '/ville',
       routes: {
@@ -50,22 +51,8 @@ class SecondScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ///
-            //////////////////////// Header
-            ///
-
-            ///
-            ////// Title
-            ///
             BlockSmall(),
-
             Text("NSMétéo", style: Theme.of(context).textTheme.titleMedium),
-
-            ///
-            ////// SearchBar
-            ///
-            ///
-
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
@@ -85,11 +72,6 @@ class SecondScreen extends StatelessWidget {
                     labelStyle: Theme.of(context).textTheme.labelSmall),
               ),
             ),
-
-            ///
-            ////// Liste des villes
-            ///
-
             ListTile(),
           ],
         ),
@@ -138,7 +120,6 @@ class _AllCitySlider extends State<AllCitySlider> {
               height: height,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
-              // autoPlay: false,
             ),
             items: imgList
                 .map(
@@ -149,78 +130,13 @@ class _AllCitySlider extends State<AllCitySlider> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    // color: Theme.of(context).colorScheme.background,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        ///
-                        //////////////////////// Header
-                        ///
-                        ////// Nom de ville
-                        ///
-
-                        Text("Lyon",
-                            style: Theme.of(context).textTheme.titleMedium),
-
-                        ////// Température
-                        ///
-
-                        Text("26°",
-                            style: Theme.of(context).textTheme.titleLarge),
-
-                        ////// Température min et max
-                        ///
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text("Min. 24°",
-                                style: Theme.of(context).textTheme.titleSmall),
-                            const BlockSmall(),
-                            Text("Max. 32°",
-                                style: Theme.of(context).textTheme.titleSmall),
-                          ],
-                        ),
-
-                        ///
-                        //////////////////////// Température par heure
-                        ///
-
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                            ),
-                            child: ListTile(),
-                          ),
-                        ),
-
-                        ///
-                        //////////////////////// Température pour les 5 jours
-                        ///
-
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                            ),
-                            child: ListTile(),
-                          ),
-                        ),
-
-                        ///
-                        //////////////////////// Bottom navbar
-                        ///
+                        CurrentWeatherBuilder(
+                            city:
+                                cityModel("lyon", 45.7578137, 4.8320114, "FR")),
+                        FutureWeatherBuilder(
+                            city: cityModel("lyon", 45.7, 4.8, "FR")),
                       ],
                     ),
                   ),
