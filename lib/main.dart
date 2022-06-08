@@ -119,38 +119,41 @@ class _SecondScreenState extends State<SecondScreen> {
                             cityList.removeAt(index);
                           });
                         },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primaryContainer,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Text(cityList[index].name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall),
-                                const SizedBox(width: 5),
-                                Text(cityList[index].country,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium),
-
-                                Text(cityList[index].state,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall),
-
-                                // CurrentWeatherBuilderList(
-                                //   city: cityList[index],
-                                // ),
-                              ],
+                        child: GestureDetector(
+                          onTap: () { print("Met ta fonction ici BG genre Navigation Push ou ce que tu veux"); },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  Text(cityList[index].name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall),
+                                  const SizedBox(width: 5),
+                                  Text(cityList[index].country,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium),
+                        
+                                  Text(cityList[index].state,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall),
+                        
+                                  // CurrentWeatherBuilderList(
+                                  //   city: cityList[index],
+                                  // ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
