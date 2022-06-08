@@ -122,6 +122,17 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                             const SizedBox(
                               width: 20,
                             ),
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Image(
+                                image: AssetImage(
+                                    "assets/images/meteoIcones/${MaxMinDay[index][3]}"),
+                                width: 24,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
                             Text(
                               "${MaxMinDay[index][0]} °",
                               style: const TextStyle(
