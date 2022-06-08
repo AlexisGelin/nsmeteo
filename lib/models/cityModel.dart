@@ -3,5 +3,6 @@ class cityModel {
   num lat;
   num lon;
   String country;
-  cityModel(this.name, this.lat, this.lon, this.country);
+  String state;
+  cityModel(this.name, this.lat, this.lon, this.country, this.state);
 }

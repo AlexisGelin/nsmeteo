@@ -1,9 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
+import 'package:nsmeteo/widgets/CarouselPage.dart';
 import 'package:nsmeteo/widgets/CurrentPageBuilder.dart';
 import 'package:nsmeteo/utils/appTheme.dart';
 import 'package:nsmeteo/widgets/Block.dart';
+import 'package:nsmeteo/widgets/CurrentWeatherBuilderList.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:nsmeteo/db/myDB.dart';
+import 'package:nsmeteo/services/geoCodingService.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,14 +24,12 @@ class MyApp extends StatelessWidget {
       theme: buildTheme(context),
       initialRoute: '/ville',
       routes: {
-        '/ville': (context) => const AllCitySlider(),
+        '/ville': (context) => const CarouselPage(),
         '/menu': (context) => const SecondScreen(),
       },
     );
   }
 }
-
-var _controller = TextEditingController();
 
 class SecondScreen extends StatefulWidget {
   const SecondScreen({Key? key}) : super(key: key);
@@ -36,7 +39,23 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
-  List<int> items = List<int>.generate(100, (int index) => index);
+  late Database db;
+  List<cityModel> cityList = [];
+
+  var _controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () async {
+      db = await myDB.initDatabase();
+      myDB.insertDB(db, cityModel("lyon", 4.78, 4.78, "Zeuby", "zeuby"));
+      myDB.getDB(db).then((value) {
+        setState(() {
+          cityList = value;
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +78,17 @@ class _SecondScreenState extends State<SecondScreen> {
                 style: Theme.of(context).textTheme.labelSmall,
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
-                      onPressed: _controller.clear,
+                      onPressed: () {
+                        setState(() {
+                          geoCodingService
+                              .getCityData(_controller.text)
+                              .then((value) {
+                            setState(() {
+                              cityList = value;
+                            });
+                          });
+                        });
+                      },
                       icon: const Icon(Icons.search),
                     ),
                     border: const OutlineInputBorder(),
@@ -76,134 +105,74 @@ class _SecondScreenState extends State<SecondScreen> {
               child: SizedBox(
                 height: 400,
                 child: ListView.builder(
-                  itemCount: items.length,
+                  itemCount: cityList.length,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Dismissible(
-                        
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          alignment: AlignmentDirectional.centerEnd,
-                          color: Colors.red,
-                          child: const Padding(
-                            padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
-                            child: Icon(Icons.delete,color: Colors.white),
+                    if (cityList.length > 0) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Dismissible(
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            alignment: AlignmentDirectional.centerEnd,
+                            color: Colors.red,
+                            child: const Padding(
+                              padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                              child: Icon(Icons.delete, color: Colors.white),
+                            ),
                           ),
-                        ),
-                        key: ValueKey<int>(items[index]),
-                        onDismissed: (DismissDirection direction) {
-                          setState(() {
-                            items.removeAt(index);
-                          });
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: Theme.of(context).colorScheme.primaryContainer,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Text("Lyon",
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall),
-                                const SizedBox(width: 200),
-                                Text("36°",
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium),
-                              ],
+                          key: ValueKey<cityModel>(cityList[index]),
+                          onDismissed: (DismissDirection direction) {
+                            setState(() {
+                              myDB.deleteRecord(db, cityList[index]);
+                              cityList.removeAt(index);
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  Text(cityList[index].name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall),
+                                  const SizedBox(width: 5),
+                                  Text(cityList[index].country,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium),
+                                  Text(cityList[index].state,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall),
+                                  const SizedBox(width: 5),
+                                  const SizedBox(width: 200),
+                                  // CurrentWeatherBuilderList(
+                                  //   city: cityList[index],
+                                  // ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return Text("il n'y a pas de ville a afficher");
+                    }
                   },
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-final List<cityModel> cityList = [
-  cityModel("lyon", 45.7578137, 4.8320114, "FR"),
-  cityModel("Marseille", 43.2961743, 5.3699525, "FR"),
-];
-
-class AllCitySlider extends StatefulWidget {
-  const AllCitySlider({Key? key}) : super(key: key);
-
-  @override
-  State<AllCitySlider> createState() => _AllCitySlider();
-}
-
-class _AllCitySlider extends State<AllCitySlider> {
-  int _selectedIndex = 1;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 1) {
-        _selectedIndex = 0;
-        Navigator.pushNamed(context, '/menu');
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    bool enable;
-    if (cityList.length < 2) {
-      enable = false;
-    } else {
-      enable = true;
-    }
-    return Scaffold(
-      body: Builder(
-        builder: (context) {
-          final double height = MediaQuery.of(context).size.height;
-          return CarouselSlider(
-            options: CarouselOptions(
-              enableInfiniteScroll: enable,
-              height: height,
-              viewportFraction: 1.0,
-              enlargeCenterPage: false,
-            ),
-            items: cityList
-                .map((item) => CurrentPageBuilder(
-                      city: item,
-                    ))
-                .toList(),
-          );
-        },
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.tertiary,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black,
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            //BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-            BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'Ville'),
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Liste'),
-          ],
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          currentIndex: _selectedIndex,
-          selectedItemColor: Theme.of(context).colorScheme.tertiary,
-          onTap: _onItemTapped,
         ),
       ),
     );

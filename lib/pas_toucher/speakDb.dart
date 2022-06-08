@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       myDB.getDB(db).then((value) {
         setState(() {
-          list = value;
+          // list = value;
         });
       });
     });
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // myDB.insertDB(db, controll.text);
                     myDB.getDB(db).then((value) {
                       setState(() {
-                        list = value;
+                        // list = value;
                       });
                     });
                   });
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           myDB.deleteRecord(db, list[index]["name"]);
                           myDB.getDB(db).then((value) {
                             setState(() {
-                              list = value;
+                              // list = value;
                             });
                           });
                         });
