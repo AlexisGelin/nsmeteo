@@ -36,7 +36,6 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
-  
   late Database db;
   List<cityModel> cityList = [];
   var _controller = TextEditingController();
@@ -80,117 +79,123 @@ class _SecondScreenState extends State<SecondScreen> {
 
   Padding _BuildMenuAllCity() {
     return Padding(
-            padding: const EdgeInsets.all(20),
-            child: SizedBox(
-              height: 400,
-              child: ListView.builder(
-                itemCount: cityList.length,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                itemBuilder: (BuildContext context, int index) {
-                  if (cityList.length > 0) {
-                    ///Une ligne avec une ville
-                    return _BuildMenuOneCity(index, context);
-                  } else {
-                    return Text("il n'y a pas de ville a afficher");
-                  }
-                },
-              ),
-            ),
-          );
+      padding: const EdgeInsets.all(20),
+      child: SizedBox(
+        height: 400,
+        child: ListView.builder(
+          itemCount: cityList.length,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          itemBuilder: (BuildContext context, int index) {
+            if (cityList.length > 0) {
+              ///Une ligne avec une ville
+              return _BuildMenuOneCity(index, context);
+            } else {
+              return Text("il n'y a pas de ville a afficher");
+            }
+          },
+        ),
+      ),
+    );
   }
 
   Padding _BuildMenuOneCity(int index, BuildContext context) {
     return Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Dismissible(
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          alignment: AlignmentDirectional.centerEnd,
-                          color: Colors.red,
-                          child: const Padding(
-                            padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
-                            child: Icon(Icons.delete, color: Colors.white),
-                          ),
-                        ),
-                        key: ValueKey<cityModel>(cityList[index]),
-                        onDismissed: (DismissDirection direction) {
-                          setState(() {
-                            myDB.deleteRecord(db, cityList[index]);
-                            cityList.removeAt(index);
-                          });
-                        },
-                        child: GestureDetector(
-                          onTap: () { print("Met ta fonction ici BG genre Navigation Push ou ce que tu veux"); },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  Text(cityList[index].name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall),
-                                  const SizedBox(width: 5),
-                                  Text(cityList[index].country,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium),
-                        
-                                  Text(cityList[index].state,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall),
-                        
-                                  // CurrentWeatherBuilderList(
-                                  //   city: cityList[index],
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Dismissible(
+        direction: DismissDirection.endToStart,
+        background: Container(
+          alignment: AlignmentDirectional.centerEnd,
+          color: Colors.red,
+          child: const Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+            child: Icon(Icons.delete, color: Colors.white),
+          ),
+        ),
+        key: ValueKey<cityModel>(cityList[index]),
+        onDismissed: (DismissDirection direction) {
+          setState(() {
+            myDB.deleteRecord(db, cityList[index]);
+            cityList.removeAt(index);
+          });
+        },
+        child: GestureDetector(
+          onTap: () {
+            print(
+                "Met ta fonction ici BG genre Navigation Push ou ce que tu veux");
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(cityList[index].name,
+                          style: Theme.of(context).textTheme.titleMedium),
+                      const SizedBox(width: 160),
+                      Text("23°",
+                          style: Theme.of(context).textTheme.titleMedium),
+                      // CurrentWeatherBuilderList(
+                      //   city: cityList[index],
+                      // ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(cityList[index].country,
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      Text(cityList[index].state,
+                          style: Theme.of(context).textTheme.bodySmall),
+                      const SizedBox(width: 110),
+                      Text("Min. " + "23°",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      const BlockSmall(),
+                      Text("Max. " + "31°",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Padding _BuildSearchBar(BuildContext context) {
-
     return Padding(
-            padding: const EdgeInsets.all(20),
-            child: TextField(
-              controller: _controller,
-              style: Theme.of(context).textTheme.labelSmall,
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        geoCodingService
-                            .getCityData(_controller.text)
-                            .then((value) {
-                          setState(() {
-                            cityList = value;
-                          });
-                        });
-                      });
-                    },
-                    icon: const Icon(Icons.search),
-                  ),
-                  border: const OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.onTertiary),
-                  ),
-                  labelText: 'Rechercher une ville',
-                  labelStyle: Theme.of(context).textTheme.labelSmall),
+      padding: const EdgeInsets.all(20),
+      child: TextField(
+        controller: _controller,
+        style: Theme.of(context).textTheme.labelSmall,
+        decoration: InputDecoration(
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  geoCodingService.getCityData(_controller.text).then((value) {
+                    setState(() {
+                      cityList = value;
+                    });
+                  });
+                });
+              },
+              icon: const Icon(Icons.search),
             ),
-          );
+            border: const OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: Theme.of(context).colorScheme.onTertiary),
+            ),
+            labelText: 'Rechercher une ville',
+            labelStyle: Theme.of(context).textTheme.labelSmall),
+      ),
+    );
   }
 }
