@@ -1,11 +1,8 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/widgets/CarouselPage.dart';
-import 'package:nsmeteo/widgets/CurrentPageBuilder.dart';
 import 'package:nsmeteo/utils/appTheme.dart';
 import 'package:nsmeteo/widgets/Block.dart';
-import 'package:nsmeteo/widgets/CurrentWeatherBuilderList.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/services/geoCodingService.dart';
@@ -39,10 +36,11 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
+  
   late Database db;
   List<cityModel> cityList = [];
-
   var _controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();

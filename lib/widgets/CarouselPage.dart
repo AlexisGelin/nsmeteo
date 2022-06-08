@@ -27,6 +27,7 @@ class _CarouselPageState extends State<CarouselPage> {
 
   late Database db;
   List<cityModel> cityList = [];
+  
   @override
   void initState() {
     super.initState();
