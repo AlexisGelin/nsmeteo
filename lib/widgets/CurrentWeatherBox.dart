@@ -1,6 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/widgets/Block.dart';
+
+
 
 class CurrentWeatherBox extends StatefulWidget {
   final CurrentWeatherData cWeatherData;
@@ -12,12 +16,21 @@ class CurrentWeatherBox extends StatefulWidget {
       CurrentWeatherBoxState(cWeatherData);
 }
 
+
+
+
 class CurrentWeatherBoxState extends State<CurrentWeatherBox> {
   CurrentWeatherData cWeatherData;
   CurrentWeatherBoxState(this.cWeatherData);
 
+  String capitalize(var str) {
+      return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
+    }
+
   @override
   Widget build(BuildContext context) {
+
+    
     return Column(
       children: [
         const BlockSmall(),
@@ -33,7 +46,7 @@ class CurrentWeatherBoxState extends State<CurrentWeatherBox> {
           
         ),
         Text(
-          "${cWeatherData.weather![0].description}",
+          capitalize(cWeatherData.weather![0].description),
           style: Theme.of(context).textTheme.titleSmall,
         ),
         Container(

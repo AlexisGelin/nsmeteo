@@ -141,7 +141,6 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           children: <Widget>[
-                            
                             Column(
                               children: [
                                 Text(
