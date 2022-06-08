@@ -36,53 +36,57 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).colorScheme.secondaryContainer,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  String dtt;
-                  if (DateTime.parse("${fWeatherData.list![index].dtTxt}")
-                          .hour <
-                      10) {
-                    dtt =
-                        "0${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
-                  } else {
-                    dtt =
-                        "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
-                  }
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      String dtt;
+                      if (DateTime.parse("${fWeatherData.list![index].dtTxt}")
+                              .hour <
+                          10) {
+                        dtt =
+                            "0${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
+                      } else {
+                        dtt =
+                            "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
+                      }
 
-                  String icons = UiUtils.getIcons(
-                      "${fWeatherData.list![index].weather![0].id}");
-                  return SizedBox(
-                    width: 50,
-                    child: ListView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: <Widget>[
-                          Text(
-                            dtt,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          const BlockSmall(),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Image(
-                              image: AssetImage(
-                                  "assets/images/meteoIcones/${icons}.png"),
-                              width: 24,
-                            ),
-                          ),
-                          const BlockSmall(),
-                          Text(
-                            "${fWeatherData.list![index].main!.temp!.round()} °",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          )
-                        ]),
-                  );
-                },
-                itemCount: 9,
-              ),
+                      String icons = UiUtils.getIcons(
+                          "${fWeatherData.list![index].weather![0].id}");
+                      return SizedBox(
+                        width: 50,
+                        child: ListView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: <Widget>[
+                              Text(
+                                dtt,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              const BlockSmall(),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Image(
+                                  image: AssetImage(
+                                      "assets/images/meteoIcones/${icons}.png"),
+                                  width: 24,
+                                ),
+                              ),
+                              const BlockSmall(),
+                              Text(
+                                "${fWeatherData.list![index].main!.temp!.round()} °",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              )
+                            ]),
+                      );
+                    },
+                    itemCount: 9,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -158,6 +162,39 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                 ),
               ),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width / 2.4,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Salut"),
+                ),
+              ),
+              const BlockSmall(),
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width / 2.4,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Salut"),
+                ),
+              )
+            ],
           ),
         ),
       ],

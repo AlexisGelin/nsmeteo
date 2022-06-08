@@ -2,11 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/widgets/CurrentPageBuilder.dart';
-
-import 'package:nsmeteo/widgets/CurrentWeatherBuilder.dart';
-import 'dart:ui';
-
-import 'package:nsmeteo/widgets/FutureWeatherBuilder.dart';
 import 'package:nsmeteo/utils/appTheme.dart';
 import 'package:nsmeteo/widgets/Block.dart';
 
@@ -33,8 +28,15 @@ class MyApp extends StatelessWidget {
 
 var _controller = TextEditingController();
 
-class SecondScreen extends StatelessWidget {
+class SecondScreen extends StatefulWidget {
   const SecondScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SecondScreen> createState() => _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+  List<int> items = List<int>.generate(100, (int index) => index);
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +50,8 @@ class SecondScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BlockSmall(),
-            Text("NSMétéo", style: Theme.of(context).textTheme.titleMedium),
+            const BlockSmall(),
+            Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
@@ -69,7 +71,61 @@ class SecondScreen extends StatelessWidget {
                     labelStyle: Theme.of(context).textTheme.labelSmall),
               ),
             ),
-            ListTile(),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: SizedBox(
+                height: 400,
+                child: ListView.builder(
+                  itemCount: items.length,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Dismissible(
+                        
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          alignment: AlignmentDirectional.centerEnd,
+                          color: Colors.red,
+                          child: const Padding(
+                            padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                            child: Icon(Icons.delete,color: Colors.white),
+                          ),
+                        ),
+                        key: ValueKey<int>(items[index]),
+                        onDismissed: (DismissDirection direction) {
+                          setState(() {
+                            items.removeAt(index);
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: Theme.of(context).colorScheme.primaryContainer,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                Text("Lyon",
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall),
+                                const SizedBox(width: 200),
+                                Text("36°",
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -95,8 +151,8 @@ class _AllCitySlider extends State<AllCitySlider> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 2) {
-        _selectedIndex = 1;
+      if (_selectedIndex == 1) {
+        _selectedIndex = 0;
         Navigator.pushNamed(context, '/menu');
       }
     });
@@ -140,8 +196,8 @@ class _AllCitySlider extends State<AllCitySlider> {
         ),
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-            BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'Lyon'),
+            //BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+            BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'Ville'),
             BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Liste'),
           ],
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -153,5 +209,3 @@ class _AllCitySlider extends State<AllCitySlider> {
     );
   }
 }
-
-// cityModel("lyon", 45.7, 4.8, "FR")
