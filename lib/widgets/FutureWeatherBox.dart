@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/widgets/Block.dart';
 
 import '../models/futureWeatherData.dart';
@@ -28,7 +27,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
     return Column(
       children: [
         _BuildPrevisionsHeureParHeure(context),
-        _BuildPrevisionSurCinqJours(context),
+        _BuildPrevisionSurPlusieursJours(context),
         _BuildVisibiliteAndPression(context),
         _BuildLeverAndCoucher(context),
         _BuildHumiditeAndRessenti(context),
@@ -79,6 +78,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -99,7 +99,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 110,
                 // decoration: BoxDecoration(
                 //   border: Border(
@@ -115,6 +115,9 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       String dtt;
+                      double width = 50;
+
+
                       if (DateTime.parse("${fWeatherData.list![index].dtTxt}")
                               .hour <
                           10) {
@@ -125,30 +128,41 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                             "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
                       }
 
+                      if(index == 0) {
+                        dtt = "Maintenant";
+                        width = 100;
+                      }
+
                       String icons = UiUtils.getIcons(
                           "${fWeatherData.list![index].weather![0].id}");
                       return SizedBox(
-                        width: 50,
+                        width: width,
                         child: ListView(
+                          shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           children: <Widget>[
-                            Text(
-                              dtt,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            const BlockSmall(),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Image(
-                                image: AssetImage(
-                                    "assets/images/meteoIcones/${icons}.png"),
-                                width: 24,
-                              ),
-                            ),
-                            const BlockSmall(),
-                            Text(
-                              "${fWeatherData.list![index].main!.temp!.round()} °",
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            
+                            Column(
+                              children: [
+                                Text(
+                                  dtt,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                const BlockSmall(),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Image(
+                                    image: AssetImage(
+                                        "assets/images/meteoIcones/${icons}.png"),
+                                    width: 24,
+                                  ),
+                                ),
+                                const BlockSmall(),
+                                Text(
+                                  "${fWeatherData.list![index].main!.temp!.round()} °",
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ],
                             )
                           ],
                         ),
@@ -165,7 +179,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
     );
   }
 
-  Padding _BuildPrevisionSurCinqJours(BuildContext context) {
+  Padding _BuildPrevisionSurPlusieursJours(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -192,7 +206,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                               color: Theme.of(context).colorScheme.onTertiary),
                         ),
                         TextSpan(
-                          text: " Prévisions sur 5 jours",
+                          text: " Prévisions sur les prochains jours",
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ],

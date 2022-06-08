@@ -69,6 +69,7 @@ class _SecondScreenState extends State<SecondScreen> {
           children: <Widget>[
             const BlockSmall(),
             Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
+            BlockSmall(),
             _BuildSearchBar(context),
             _BuildMenuAllCity(),
           ],
@@ -79,9 +80,9 @@ class _SecondScreenState extends State<SecondScreen> {
 
   Padding _BuildMenuAllCity() {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
       child: SizedBox(
-        height: 400,
+        height: 489,
         child: ListView.builder(
           itemCount: cityList.length,
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -138,7 +139,9 @@ class _SecondScreenState extends State<SecondScreen> {
                     children: [
                       Text(cityList[index].name,
                           style: Theme.of(context).textTheme.titleMedium),
-                      const SizedBox(width: 160),
+                      const SizedBox(width: 120),
+                      Icon(Icons.abc),
+                      const BlockSmall(),
                       Text("23°",
                           style: Theme.of(context).textTheme.titleMedium),
                       // CurrentWeatherBuilderList(
@@ -193,7 +196,7 @@ class _SecondScreenState extends State<SecondScreen> {
               borderSide:
                   BorderSide(color: Theme.of(context).colorScheme.onTertiary),
             ),
-            labelText: 'Rechercher une ville',
+            labelText: 'Ajouter une ville',
             labelStyle: Theme.of(context).textTheme.labelSmall),
       ),
     );
