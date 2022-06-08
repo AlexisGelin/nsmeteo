@@ -4,6 +4,7 @@ import 'package:nsmeteo/widgets/Block.dart';
 
 import '../models/futureWeatherData.dart';
 import '../utils/TranformData.dart';
+import '../utils/Ui.dart';
 
 class FutureWeatherBox extends StatefulWidget {
   final FutureWeatherData fWeatherData;
@@ -17,6 +18,7 @@ class FutureWeatherBox extends StatefulWidget {
 class FutureWeatherBoxState extends State<FutureWeatherBox> {
   FutureWeatherData fWeatherData;
   late List<List<dynamic>> MaxMinDay;
+
   FutureWeatherBoxState(this.fWeatherData) {
     this.MaxMinDay = TransformData.MinMaxByDays(fWeatherData);
   }
@@ -51,6 +53,8 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                         "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
                   }
 
+                  String icons = UiUtils.getIcons(
+                      "${fWeatherData.list![index].weather![0].id}");
                   return SizedBox(
                     width: 50,
                     child: ListView(
@@ -61,9 +65,13 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           const BlockSmall(),
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
-                            child: Icon(Icons.abc),
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/meteoIcones/${icons}"),
+                              width: 24,
+                            ),
                           ),
                           const BlockSmall(),
                           Text(
@@ -73,7 +81,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                         ]),
                   );
                 },
-                itemCount: 8,
+                itemCount: 9,
               ),
             ),
           ),
@@ -106,13 +114,23 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                           height: 40,
                           width: 300,
                           child: ListView(
-                            
                             scrollDirection: Axis.horizontal,
                             children: [
                               Text(
                                 txt,
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 20),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Image(
+                                  image: AssetImage(
+                                      "assets/images/meteoIcones/${MaxMinDay[index][3]}"),
+                                  width: 24,
+                                ),
                               ),
                               const SizedBox(
                                 width: 20,

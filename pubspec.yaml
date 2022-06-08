@@ -46,7 +46,8 @@ flutter:
     - assets/images/meteoIcones/rain.png
     - assets/images/meteoIcones/snow.png
     - assets/images/meteoIcones/sun.png
-    - assets/images/meteoIcones/water.png
+    - assets/images/meteoIcones/thunder.png
+    - assets/images/meteoIcones/haze.png
     - assets/images/meteoIcones/wind.png
 
   #Background GIF
