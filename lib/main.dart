@@ -60,6 +60,7 @@ class _SecondScreenState extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         elevation: 0,
@@ -71,110 +72,124 @@ class _SecondScreenState extends State<SecondScreen> {
           children: <Widget>[
             const BlockSmall(),
             Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: _controller,
-                style: Theme.of(context).textTheme.labelSmall,
-                decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          geoCodingService
-                              .getCityData(_controller.text)
-                              .then((value) {
-                            setState(() {
-                              cityList = value;
-                            });
-                          });
-                        });
-                      },
-                      icon: const Icon(Icons.search),
-                    ),
-                    border: const OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Theme.of(context).colorScheme.onTertiary),
-                    ),
-                    labelText: 'Rechercher une ville',
-                    labelStyle: Theme.of(context).textTheme.labelSmall),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: SizedBox(
-                height: 400,
-                child: ListView.builder(
-                  itemCount: cityList.length,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  itemBuilder: (BuildContext context, int index) {
-                    if (cityList.length > 0) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Dismissible(
-                          direction: DismissDirection.endToStart,
-                          background: Container(
-                            alignment: AlignmentDirectional.centerEnd,
-                            color: Colors.red,
-                            child: const Padding(
-                              padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
-                              child: Icon(Icons.delete, color: Colors.white),
-                            ),
-                          ),
-                          key: ValueKey<cityModel>(cityList[index]),
-                          onDismissed: (DismissDirection direction) {
-                            setState(() {
-                              myDB.deleteRecord(db, cityList[index]);
-                              cityList.removeAt(index);
-                            });
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  Text(cityList[index].name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall),
-                                  const SizedBox(width: 5),
-                                  Text(cityList[index].country,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium),
-                                  Text(cityList[index].state,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall),
-                                  const SizedBox(width: 5),
-                                  const SizedBox(width: 200),
-                                  // CurrentWeatherBuilderList(
-                                  //   city: cityList[index],
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Text("il n'y a pas de ville a afficher");
-                    }
-                  },
-                ),
-              ),
-            ),
+            _BuildSearchBar(context),
+            _BuildMenuAllCity(),
           ],
         ),
       ),
     );
+  }
+
+  Padding _BuildMenuAllCity() {
+    return Padding(
+            padding: const EdgeInsets.all(20),
+            child: SizedBox(
+              height: 400,
+              child: ListView.builder(
+                itemCount: cityList.length,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                itemBuilder: (BuildContext context, int index) {
+                  if (cityList.length > 0) {
+                    ///Une ligne avec une ville
+                    return _BuildMenuOneCity(index, context);
+                  } else {
+                    return Text("il n'y a pas de ville a afficher");
+                  }
+                },
+              ),
+            ),
+          );
+  }
+
+  Padding _BuildMenuOneCity(int index, BuildContext context) {
+    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Dismissible(
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          alignment: AlignmentDirectional.centerEnd,
+                          color: Colors.red,
+                          child: const Padding(
+                            padding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                            child: Icon(Icons.delete, color: Colors.white),
+                          ),
+                        ),
+                        key: ValueKey<cityModel>(cityList[index]),
+                        onDismissed: (DismissDirection direction) {
+                          setState(() {
+                            myDB.deleteRecord(db, cityList[index]);
+                            cityList.removeAt(index);
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                Text(cityList[index].name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall),
+                                const SizedBox(width: 5),
+                                Text(cityList[index].country,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium),
+
+                                Text(cityList[index].state,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall),
+
+                                // CurrentWeatherBuilderList(
+                                //   city: cityList[index],
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+  }
+
+  Padding _BuildSearchBar(BuildContext context) {
+
+    return Padding(
+            padding: const EdgeInsets.all(20),
+            child: TextField(
+              controller: _controller,
+              style: Theme.of(context).textTheme.labelSmall,
+              decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        geoCodingService
+                            .getCityData(_controller.text)
+                            .then((value) {
+                          setState(() {
+                            cityList = value;
+                          });
+                        });
+                      });
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
+                  border: const OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onTertiary),
+                  ),
+                  labelText: 'Rechercher une ville',
+                  labelStyle: Theme.of(context).textTheme.labelSmall),
+            ),
+          );
   }
 }

@@ -32,7 +32,6 @@ class _CarouselPageState extends State<CarouselPage> {
     super.initState();
     Future.delayed(Duration.zero, () async {
       db = await myDB.initDatabase();
-
       myDB.getDB(db).then((value) {
         setState(() {
           cityList = value;
@@ -61,33 +60,34 @@ class _CarouselPageState extends State<CarouselPage> {
               enlargeCenterPage: false,
             ),
             items: cityList
-                .map((item) => CurrentPageBuilder(
-                      city: item,
-                    ))
-                .toList(),
+                .map((item) => CurrentPageBuilder(city: item)).toList(),
           );
         },
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.tertiary,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black,
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            //BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-            BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'Ville'),
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Liste'),
-          ],
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          currentIndex: _selectedIndex,
-          selectedItemColor: Theme.of(context).colorScheme.tertiary,
-          onTap: _onItemTapped,
-        ),
+      bottomNavigationBar: _BuildBottomNavBar(context),
+    );
+  }
+
+  Container _BuildBottomNavBar(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.tertiary,
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black,
+          ),
+        ],
+      ),
+      child: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          //BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+          BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'Ville'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Liste'),
+        ],
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Theme.of(context).colorScheme.tertiary,
+        onTap: _onItemTapped,
       ),
     );
   }
