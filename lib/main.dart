@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
+import 'package:nsmeteo/widgets/CurrentPageBuilder.dart';
 
 import 'package:nsmeteo/widgets/CurrentWeatherBuilder.dart';
 import 'dart:ui';
@@ -76,13 +77,9 @@ class SecondScreen extends StatelessWidget {
   }
 }
 
-final List<String> imgList = [
-  'assets/images/background/thunder.gif',
-  'assets/images/background/cloudy.gif',
-  'assets/images/background/cloudysun.gif',
-  'assets/images/background/rain.gif',
-  'assets/images/background/snow.gif',
-  'assets/images/background/sunny.gif',
+final List<cityModel> cityList = [
+  cityModel("lyon", 45.7578137, 4.8320114, "FR"),
+  cityModel("Marseille", 43.2961743, 5.3699525, "FR"),
 ];
 
 class AllCitySlider extends StatefulWidget {
@@ -107,36 +104,27 @@ class _AllCitySlider extends State<AllCitySlider> {
 
   @override
   Widget build(BuildContext context) {
+    bool enable;
+    if (cityList.length < 2) {
+      enable = false;
+    } else {
+      enable = true;
+    }
     return Scaffold(
       body: Builder(
         builder: (context) {
           final double height = MediaQuery.of(context).size.height;
           return CarouselSlider(
             options: CarouselOptions(
+              enableInfiniteScroll: enable,
               height: height,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
             ),
-            items: imgList
-                .map(
-                  (item) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(item),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: ListView(
-                      children: <Widget>[
-                        CurrentWeatherBuilder(
-                            city:
-                                cityModel("lyon", 45.7578137, 4.8320114, "FR")),
-                        FutureWeatherBuilder(
-                            city: cityModel("lyon", 45.7, 4.8, "FR")),
-                      ],
-                    ),
-                  ),
-                )
+            items: cityList
+                .map((item) => CurrentPageBuilder(
+                      city: item,
+                    ))
                 .toList(),
           );
         },
@@ -165,6 +153,5 @@ class _AllCitySlider extends State<AllCitySlider> {
     );
   }
 }
-
 
 // cityModel("lyon", 45.7, 4.8, "FR")
