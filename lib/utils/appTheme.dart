@@ -63,8 +63,8 @@ ThemeData buildTheme(BuildContext context) {
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: ColorScheme.fromSwatch().onPrimary),
-          labelSmall: TextStyle(
-              fontSize: 16, color: ColorScheme.fromSwatch().onTertiary),
+          labelSmall: const TextStyle(
+              fontSize: 16, color: placeholderColor),
         ),
   );
 }
