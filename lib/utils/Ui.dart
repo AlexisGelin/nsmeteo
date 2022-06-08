@@ -36,7 +36,7 @@ class UiUtils {
         id == "302" ||
         id == "301" ||
         id == "300") {
-      return "rain.png";
+      return "rain";
     } else if (id == "232" ||
         id == "231" ||
         id == "230" ||
@@ -49,7 +49,7 @@ class UiUtils {
         id == "960" ||
         id == "200" ||
         id == "961") {
-      return "thunder.png";
+      return "thunder";
     } else if (id == "962" ||
         id == "959" ||
         id == "958" ||
@@ -68,7 +68,7 @@ class UiUtils {
         id == "761" ||
         id == "751" ||
         id == "731") {
-      return "wind.png";
+      return "wind";
     } else if (id == "906" ||
         id == "903" ||
         id == "612" ||
@@ -76,13 +76,13 @@ class UiUtils {
         id == "602" ||
         id == "601" ||
         id == "600") {
-      return "snow.png";
+      return "snow";
     } else if (id == "762" || id == "741" || id == "721" || id == "711") {
-      return "haze.png";
+      return "haze";
     } else if (id == "801" || id == "802" || id == "803" || id == "804") {
-      return "cloudysun.png";
+      return "cloudysun";
     } else {
-      return "sun.png";
+      return "sun";
     }
   }
 

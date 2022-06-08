@@ -69,7 +69,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                             alignment: Alignment.centerLeft,
                             child: Image(
                               image: AssetImage(
-                                  "assets/images/meteoIcones/${icons}"),
+                                  "assets/images/meteoIcones/${icons}.png"),
                               width: 24,
                             ),
                           ),
@@ -128,7 +128,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                                 alignment: Alignment.topCenter,
                                 child: Image(
                                   image: AssetImage(
-                                      "assets/images/meteoIcones/${MaxMinDay[index][3]}"),
+                                      "assets/images/meteoIcones/${MaxMinDay[index][3]}.png"),
                                   width: 24,
                                 ),
                               ),
