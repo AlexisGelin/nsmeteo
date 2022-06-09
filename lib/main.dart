@@ -3,6 +3,7 @@ import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/widgets/CarouselPage.dart';
 import 'package:nsmeteo/utils/appTheme.dart';
 import 'package:nsmeteo/widgets/Block.dart';
+import 'package:nsmeteo/widgets/SelectPageBuilde.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/services/geoCodingService.dart';
@@ -38,7 +39,7 @@ class SecondScreen extends StatefulWidget {
 class _SecondScreenState extends State<SecondScreen> {
   late Database db;
   List<cityModel> cityList = [];
-  var _controller = TextEditingController();
+  final _controller = TextEditingController();
 
   @override
   void initState() {
@@ -69,7 +70,7 @@ class _SecondScreenState extends State<SecondScreen> {
           children: <Widget>[
             const BlockSmall(),
             Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
-            BlockSmall(),
+            const BlockSmall(),
             _BuildSearchBar(context),
             _BuildMenuAllCity(),
           ],
@@ -121,8 +122,11 @@ class _SecondScreenState extends State<SecondScreen> {
         },
         child: GestureDetector(
           onTap: () {
-            print(
-                "Met ta fonction ici BG genre Navigation Push ou ce que tu veux");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SelectPageBuilder(city: cityList[index])));
           },
           child: Container(
             alignment: Alignment.center,
