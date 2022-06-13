@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/CurrentWeatherBox.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
+import 'package:sqflite/sqflite.dart';
 
+import '../main.dart';
 import '../utils/Ui.dart';
-import 'CurrentWeatherBuilder.dart';
-import 'FutureWeatherBuilder.dart';
+import 'CarouselPage.dart';
+import 'OnePageCarousel/Builder/CurrentWeatherBuilder.dart';
+import 'OnePageCarousel/Builder/CurrentWeatherBuilderMoreInfo.dart';
+import 'OnePageCarousel/Builder/FutureWeatherBuilder.dart';
 
 class SelectPageBuilder extends StatefulWidget {
   final cityModel city;
-  const SelectPageBuilder({Key? key, required this.city}) : super(key: key);
+  final Database db;
+  const SelectPageBuilder({Key? key, required this.city, required this.db})
+      : super(key: key);
 
   @override
-  State<SelectPageBuilder> createState() => SelectPageBuilderState(city);
+  State<SelectPageBuilder> createState() => SelectPageBuilderState(city, db);
 }
 
 class SelectPageBuilderState extends State<SelectPageBuilder> {
   cityModel city;
-
-  SelectPageBuilderState(this.city);
+  Database db;
+  SelectPageBuilderState(this.city, this.db);
   late final Future<CurrentWeatherData> cW;
 
   @override
@@ -34,19 +41,49 @@ class SelectPageBuilderState extends State<SelectPageBuilder> {
       future: cW,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    "assets/images/background/${UiUtils.getBackground("${snapshot.data!.weather![0].id}")}"),
-                fit: BoxFit.cover,
+          return Scaffold(
+            appBar: AppBar(
+              actions: <Widget>[
+                FlatButton(
+                  textColor: Colors.white,
+                  onPressed: () {
+                    myDB.insertDB(db, city);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CarouselPage()));
+                  },
+                  child: Text("Ajouter"),
+                  shape:
+                      CircleBorder(side: BorderSide(color: Colors.transparent)),
+                ),
+              ],
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back,
+                    color: Color.fromARGB(255, 255, 255, 255)),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SecondScreen())),
               ),
             ),
-            child: ListView(
-              children: <Widget>[
-                CurrentWeatherBuilder(city: city),
-                FutureWeatherBuilder(city: city),
-              ],
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                      "assets/images/background/${UiUtils.getBackground("${snapshot.data!.weather![0].id}")}"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: ListView(
+                children: <Widget>[
+                  CurrentWeatherBuilder(city: city),
+                  FutureWeatherBuilder(city: city),
+                  CurrentWeatherBuilderMoreInfo(city: city),
+                ],
+              ),
             ),
           );
         } else if (snapshot.hasError) {

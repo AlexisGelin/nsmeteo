@@ -2,18 +2,19 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
-import 'package:nsmeteo/widgets/Block.dart';
+import 'package:nsmeteo/utils/Block.dart';
 
 
 
 class CurrentWeatherBox extends StatefulWidget {
   final CurrentWeatherData cWeatherData;
-  const CurrentWeatherBox({Key? key, required this.cWeatherData})
+  final String cityName;
+  const CurrentWeatherBox({Key? key, required this.cWeatherData, required this.cityName})
       : super(key: key);
 
   @override
   State<CurrentWeatherBox> createState() =>
-      CurrentWeatherBoxState(cWeatherData);
+      CurrentWeatherBoxState(cWeatherData,cityName);
 }
 
 
@@ -21,7 +22,8 @@ class CurrentWeatherBox extends StatefulWidget {
 
 class CurrentWeatherBoxState extends State<CurrentWeatherBox> {
   CurrentWeatherData cWeatherData;
-  CurrentWeatherBoxState(this.cWeatherData);
+  String cityName;
+  CurrentWeatherBoxState(this.cWeatherData, this.cityName);
 
   String capitalize(var str) {
       return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
@@ -37,7 +39,7 @@ class CurrentWeatherBoxState extends State<CurrentWeatherBox> {
         Align(
             alignment: Alignment.topCenter,
             child: Text(
-              cWeatherData.name!,
+              cityName,
               style: Theme.of(context).textTheme.titleMedium,
             )),
         Text(

@@ -4,22 +4,19 @@ import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/services/meteoService.dart';
 import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 
-import 'CurrentWeatherBoxList.dart';
-
-class CurrentWeatherBuilderList extends StatefulWidget {
+class CurrentWeatherBuilder extends StatefulWidget {
   final cityModel city;
-  const CurrentWeatherBuilderList({Key? key, required this.city})
-      : super(key: key);
+  const CurrentWeatherBuilder({Key? key, required this.city}) : super(key: key);
 
   @override
-  State<CurrentWeatherBuilderList> createState() =>
-      CurrentWeatherBuilderListState(city);
+  State<CurrentWeatherBuilder> createState() =>
+      CurrentWeatherBuilderState(city);
 }
 
-class CurrentWeatherBuilderListState extends State<CurrentWeatherBuilderList> {
+class CurrentWeatherBuilderState extends State<CurrentWeatherBuilder> {
   cityModel city;
 
-  CurrentWeatherBuilderListState(this.city);
+  CurrentWeatherBuilderState(this.city);
   late final Future<CurrentWeatherData> cW;
 
   @override
@@ -34,7 +31,7 @@ class CurrentWeatherBuilderListState extends State<CurrentWeatherBuilderList> {
       future: cW,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return CurrentWeatherBoxList(cWeatherData: snapshot.data!);
+          return CurrentWeatherBox(cWeatherData: snapshot.data!, cityName: city.name,);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }

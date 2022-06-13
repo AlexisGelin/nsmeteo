@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/widgets/CarouselPage.dart';
 import 'package:nsmeteo/utils/appTheme.dart';
-import 'package:nsmeteo/widgets/Block.dart';
+import 'package:nsmeteo/utils/Block.dart';
 import 'package:nsmeteo/widgets/SelectPageBuilde.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
@@ -46,7 +46,6 @@ class _SecondScreenState extends State<SecondScreen> {
     super.initState();
     Future.delayed(Duration.zero, () async {
       db = await myDB.initDatabase();
-      myDB.insertDB(db, cityModel("lyon", 4.78, 4.78, "Zeuby", "zeuby"));
       myDB.getDB(db).then((value) {
         setState(() {
           cityList = value;
@@ -62,6 +61,12 @@ class _SecondScreenState extends State<SecondScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back,
+              color: Color.fromARGB(255, 255, 255, 255)),
+          onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CarouselPage())),
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.secondary,
       body: Center(
@@ -126,7 +131,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        SelectPageBuilder(city: cityList[index])));
+                        SelectPageBuilder(city: cityList[index], db: db)));
           },
           child: Container(
             alignment: Alignment.center,

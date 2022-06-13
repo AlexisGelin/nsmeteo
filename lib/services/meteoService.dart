@@ -15,8 +15,9 @@ class meteoService {
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
     var url = Uri.https("api.openweathermap.org", "/data/2.5/weather", {
-      'lat': '${_cityModel.lat}',
-      'lon': '${_cityModel.lon}',
+      // 'lat': '${_cityModel.lat}',
+      // 'lon': '${_cityModel.lon}',
+      'q' : "${_cityModel.name}",
       'units': units,
       'appid': 'e6f4a7d38ed14b86bb576f01ec00b341',
       'lang': 'FR'

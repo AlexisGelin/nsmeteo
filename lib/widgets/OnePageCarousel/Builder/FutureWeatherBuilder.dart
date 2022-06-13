@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/CurrentWeatherBox.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 
-import '../models/futureWeatherData.dart';
-import 'FutureWeatherBox.dart';
+import '../../../models/futureWeatherData.dart';
+import '../Style/FutureWeatherBox.dart';
 
 class FutureWeatherBuilder extends StatefulWidget {
   final cityModel city;

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/CurrentWeatherBox.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/Builder/CurrentWeatherBuilderMoreInfo.dart';
 
-import '../utils/Ui.dart';
-import 'CurrentWeatherBuilder.dart';
-import 'FutureWeatherBuilder.dart';
+import '../../utils/Ui.dart';
+import 'Builder/CurrentWeatherBuilder.dart';
+import 'Builder/FutureWeatherBuilder.dart';
 
 class CurrentPageBuilder extends StatefulWidget {
   final cityModel city;
@@ -46,6 +47,7 @@ class CurrentPageBuilderState extends State<CurrentPageBuilder> {
               children: <Widget>[
                 CurrentWeatherBuilder(city: city),
                 FutureWeatherBuilder(city: city),
+                CurrentWeatherBuilderMoreInfo(city: city),
               ],
             ),
           );

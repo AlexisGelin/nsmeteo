@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:nsmeteo/widgets/CurrentPageBuilder.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/CurrentPageBuilder.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import '../models/cityModel.dart';
@@ -27,10 +27,11 @@ class _CarouselPageState extends State<CarouselPage> {
 
   late Database db;
   List<cityModel> cityList = [];
-  
+
   @override
   void initState() {
     super.initState();
+    cityList = [];
     Future.delayed(Duration.zero, () async {
       db = await myDB.initDatabase();
       myDB.getDB(db).then((value) {
@@ -44,7 +45,11 @@ class _CarouselPageState extends State<CarouselPage> {
   @override
   Widget build(BuildContext context) {
     bool enable;
-    if (cityList.length < 2) {
+    // if (cityList.length == 0) {
+    //   cityList.add(cityModel("Paris", 5.2, 5.2, "country", "state"));
+    //   enable = false;
+    // }
+   if (cityList.length < 2) {
       enable = false;
     } else {
       enable = true;
@@ -60,8 +65,8 @@ class _CarouselPageState extends State<CarouselPage> {
               viewportFraction: 1.0,
               enlargeCenterPage: false,
             ),
-            items: cityList
-                .map((item) => CurrentPageBuilder(city: item)).toList(),
+            items:
+                cityList.map((item) => CurrentPageBuilder(city: item)).toList(),
           );
         },
       ),

@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/currentWeatherData.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/CurrentWeatherBox.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
+import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBoxMoreInfo.dart';
 
-class CurrentWeatherBuilder extends StatefulWidget {
+class CurrentWeatherBuilderMoreInfo extends StatefulWidget {
   final cityModel city;
-  const CurrentWeatherBuilder({Key? key, required this.city}) : super(key: key);
+  const CurrentWeatherBuilderMoreInfo({Key? key, required this.city}) : super(key: key);
 
   @override
-  State<CurrentWeatherBuilder> createState() =>
-      CurrentWeatherBuilderState(city);
+  State<CurrentWeatherBuilderMoreInfo> createState() =>
+      CurrentWeatherBuilderMoreInfoState(city);
 }
 
-class CurrentWeatherBuilderState extends State<CurrentWeatherBuilder> {
+class CurrentWeatherBuilderMoreInfoState extends State<CurrentWeatherBuilderMoreInfo> {
   cityModel city;
 
-  CurrentWeatherBuilderState(this.city);
+  CurrentWeatherBuilderMoreInfoState(this.city);
   late final Future<CurrentWeatherData> cW;
 
   @override
@@ -31,7 +32,7 @@ class CurrentWeatherBuilderState extends State<CurrentWeatherBuilder> {
       future: cW,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return CurrentWeatherBox(cWeatherData: snapshot.data!);
+          return CurrentWeatherBoxMoreInfo(cWeatherData: snapshot.data!);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
@@ -40,3 +41,4 @@ class CurrentWeatherBuilderState extends State<CurrentWeatherBuilder> {
     );
   }
 }
+
