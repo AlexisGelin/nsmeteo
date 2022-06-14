@@ -74,41 +74,39 @@ class _SecondScreenState extends State<SecondScreen> {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const BlockSmall(),
-            Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
-            const BlockSmall(),
-            _BuildSearchBar(context),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const BlockSmall(),
+              Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
+              const BlockSmall(),
+              _BuildSearchBar(context),
 
-            // fait de ses 3 la une seul list avec des onglet genre Ville rechercher -> list Ville recament consulter -> list Vos Ville ->list
-            _BuildMenuAllCityApi(),
-            _BuildMenuAllCity(),
-          ],
+              // fait de ses 3 la une seul list avec des onglet genre Ville rechercher -> list Ville recament consulter -> list Vos Ville ->list
+              _BuildMenuAllCityApi(),
+              _BuildMenuAllCity(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Padding _BuildMenuAllCityApi() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      child: SizedBox(
-        height: 200,
-        child: ListView.builder(
-          itemCount: cityListApi.length,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          itemBuilder: (BuildContext context, int index) {
-            if (cityListApi.length > 0) {
-              ///Une ligne avec une ville
-              return _BuildMenuOneCityApi(index, context);
-            } else {
-              return Text("il n'y a pas de ville a afficher");
-            }
-          },
-        ),
+  SizedBox _BuildMenuAllCityApi() {
+    return SizedBox(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: cityListApi.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (cityListApi.length > 0) {
+            ///Une ligne avec une ville
+            return _BuildMenuOneCityApi(index, context);
+          } else {
+            return Text("il n'y a pas de ville a afficher");
+          }
+        },
       ),
     );
   }
@@ -116,85 +114,104 @@ class _SecondScreenState extends State<SecondScreen> {
   Padding _BuildMenuAllCity() {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      child: SizedBox(
-        height: 200,
-        child: ListView.builder(
-          itemCount: cityList.length,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          itemBuilder: (BuildContext context, int index) {
-            if (cityList.length > 0) {
-              ///Une ligne avec une ville
-              return _BuildMenuOneCity(index, context);
-            } else {
-              return Text("il n'y a pas de ville a afficher");
-            }
-          },
-        ),
+      child: Column(
+        children: [
+          Text("Vos villes", style: Theme.of(context).textTheme.titleMedium),
+          SizedBox(
+            height: 355,
+            child: ListView.builder(
+              itemCount: cityList.length,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              itemBuilder: (BuildContext context, int index) {
+                if (cityList.length > 0) {
+                  ///Une ligne avec une ville
+                  return _BuildMenuOneCity(index, context);
+                } else {
+                  return Text("il n'y a pas de ville a afficher");
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Padding _BuildMenuOneCityApi(int index, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      SelectPageBuilder(city: cityListApi[index], db: db)));
-        },
-        child: Container(
-          alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: Theme.of(context).colorScheme.primaryContainer,
-          ),
-          child: FutureBuilder<CurrentWeatherData>(
-            future: meteoService.requestCurrentMeteoDataByGeoLoc(
-                cityListApi[index], "metric"),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(cityListApi[index].name,
-                              style: Theme.of(context).textTheme.titleMedium),
-                          const SizedBox(width: 120),
-                          const BlockSmall(),
-                          Text("${snapshot.data!.main!.temp!.round()}°",
-                              style: Theme.of(context).textTheme.titleMedium),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(cityListApi[index].country,
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          Text(cityListApi[index].state,
-                              style: Theme.of(context).textTheme.bodySmall),
-                          const SizedBox(width: 110),
-                          Text(
-                              "Min. " +
-                                  "${snapshot.data!.main!.tempMin!.round()}°",
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          const BlockSmall(),
-                          Text(
-                              "Max. " +
-                                  "${snapshot.data!.main!.tempMax!.round()}°",
-                              style: Theme.of(context).textTheme.bodyMedium),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              }
-              return const CircularProgressIndicator();
-            },
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      child: SizedBox(
+        height: 110,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SelectPageBuilder(city: cityListApi[index], db: db)));
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+            child: FutureBuilder<CurrentWeatherData>(
+              future: meteoService.requestCurrentMeteoDataByGeoLoc(
+                  cityListApi[index], "metric"),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(cityListApi[index].name,
+                                style: Theme.of(context).textTheme.titleMedium),
+                            Text("${snapshot.data!.main!.temp!.round()}°",
+                                style: Theme.of(context).textTheme.titleMedium),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(cityListApi[index].country,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                                Text(cityListApi[index].state,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                    "Min. " +
+                                        "${snapshot.data!.main!.tempMin!.round()}°",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                                const BlockSmall(),
+                                Text(
+                                    "Max. " +
+                                        "${snapshot.data!.main!.tempMax!.round()}°",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
           ),
         ),
       ),
@@ -246,31 +263,41 @@ class _SecondScreenState extends State<SecondScreen> {
                     child: Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(cityList[index].name,
                                 style: Theme.of(context).textTheme.titleMedium),
-                            const SizedBox(width: 120),
-                            const BlockSmall(),
                             Text("${snapshot.data!.main!.temp!.round()}°",
                                 style: Theme.of(context).textTheme.titleMedium),
                           ],
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(cityList[index].country,
-                                style: Theme.of(context).textTheme.bodyMedium),
-                            Text(cityList[index].state,
-                                style: Theme.of(context).textTheme.bodySmall),
-                            const SizedBox(width: 110),
-                            Text(
-                                "Min. " +
-                                    "${snapshot.data!.main!.tempMin!.round()}°",
-                                style: Theme.of(context).textTheme.bodyMedium),
-                            const BlockSmall(),
-                            Text(
-                                "Max. " +
-                                    "${snapshot.data!.main!.tempMax!.round()}°",
-                                style: Theme.of(context).textTheme.bodyMedium),
+                            Row(
+                              children: [
+                                Text(cityList[index].country,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                                Text(cityList[index].state,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                    "Min. " +
+                                        "${snapshot.data!.main!.tempMin!.round()}°",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                                Text(
+                                    "Max. " +
+                                        "${snapshot.data!.main!.tempMax!.round()}°",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                              ],
+                            ),
                           ],
                         ),
                       ],
