@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/models/cityModel.dart';
-import 'package:nsmeteo/models/currentWeatherData.dart';
+import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/services/meteoService.dart';
 import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 import 'package:sqflite/sqflite.dart';

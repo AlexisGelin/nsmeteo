@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nsmeteo/models/currentWeatherData.dart';
+import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/utils/Block.dart';
 
 class CurrentWeatherBoxList extends StatefulWidget {

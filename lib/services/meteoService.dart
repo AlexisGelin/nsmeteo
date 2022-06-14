@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:nsmeteo/models/currentWeatherData.dart';
+import 'package:nsmeteo/models/Meteo.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/cityModel.dart';
