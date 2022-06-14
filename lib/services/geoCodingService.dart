@@ -29,6 +29,7 @@ class geoCodingService {
     }
     return cityModelsList;
   }
+  
 
   static dynamic getContryNameByCode() async {
     var url2 = Uri.http("country.io", "/names.json");

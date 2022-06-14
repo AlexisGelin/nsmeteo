@@ -25,7 +25,7 @@ class CurrentPageBuilderState extends State<CurrentPageBuilder> {
 
   @override
   void initState() {
-    cW = meteoService.requestCurrentMeteoData(city, "metric");
+    cW = meteoService.requestCurrentMeteoDataByName(city, "metric");
     super.initState();
   }
 

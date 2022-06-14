@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
-import 'package:nsmeteo/widgets/CarouselPage.dart';
+
 import 'package:nsmeteo/utils/appTheme.dart';
 import 'package:nsmeteo/utils/Block.dart';
+import 'package:nsmeteo/widgets/CarouselPage.dart';
 import 'package:nsmeteo/widgets/SelectPageBuilde.dart';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/services/geoCodingService.dart';
+import 'package:nsmeteo/services/meteoService.dart';
+import 'models/Meteo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -140,40 +144,49 @@ class _SecondScreenState extends State<SecondScreen> {
               borderRadius: BorderRadius.circular(4),
               color: Theme.of(context).colorScheme.primaryContainer,
             ),
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(cityList[index].name,
-                          style: Theme.of(context).textTheme.titleMedium),
-                      const SizedBox(width: 120),
-                      Icon(Icons.abc),
-                      const BlockSmall(),
-                      Text("23°",
-                          style: Theme.of(context).textTheme.titleMedium),
-                      // CurrentWeatherBuilderList(
-                      //   city: cityList[index],
-                      // ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(cityList[index].country,
-                          style: Theme.of(context).textTheme.bodyMedium),
-                      Text(cityList[index].state,
-                          style: Theme.of(context).textTheme.bodySmall),
-                      const SizedBox(width: 110),
-                      Text("Min. " + "23°",
-                          style: Theme.of(context).textTheme.bodyMedium),
-                      const BlockSmall(),
-                      Text("Max. " + "31°",
-                          style: Theme.of(context).textTheme.bodyMedium),
-                    ],
-                  ),
-                ],
-              ),
+            child: FutureBuilder<CurrentWeatherData>(
+              future: meteoService.requestCurrentMeteoDataByGeoLoc(
+                  cityList[index], "metric"),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(cityList[index].name,
+                                style: Theme.of(context).textTheme.titleMedium),
+                            const SizedBox(width: 120),
+                            Icon(Icons.abc),
+                            const BlockSmall(),
+                            Text("${snapshot.data!.main!.temp!.round()}°",
+                                style: Theme.of(context).textTheme.titleMedium),
+                            // CurrentWeatherBuilderList(
+                            //   city: cityList[index],
+                            // ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(cityList[index].country,
+                                style: Theme.of(context).textTheme.bodyMedium),
+                            Text(cityList[index].state,
+                                style: Theme.of(context).textTheme.bodySmall),
+                            const SizedBox(width: 110),
+                            Text("Min. " + "${snapshot.data!.main!.tempMin!.round()}°",
+                                style: Theme.of(context).textTheme.bodyMedium),
+                            const BlockSmall(),
+                            Text("Max. " + "${snapshot.data!.main!.tempMax!.round()}°",
+                                style: Theme.of(context).textTheme.bodyMedium),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                 return const CircularProgressIndicator();
+              },
             ),
           ),
         ),

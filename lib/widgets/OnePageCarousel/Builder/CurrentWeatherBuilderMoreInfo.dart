@@ -22,7 +22,7 @@ class CurrentWeatherBuilderMoreInfoState extends State<CurrentWeatherBuilderMore
 
   @override
   void initState() {
-    cW = meteoService.requestCurrentMeteoData(city, "metric");
+    cW = meteoService.requestCurrentMeteoDataByName(city, "metric");
     super.initState();
   }
 

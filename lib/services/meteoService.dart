@@ -7,7 +7,7 @@ import '../models/cityModel.dart';
 import '../models/futureWeatherData.dart';
 
 class meteoService {
-  static Future<CurrentWeatherData> requestCurrentMeteoData(
+  static Future<CurrentWeatherData> requestCurrentMeteoDataByGeoLoc(
       cityModel _cityModel, String? units) async {
     late CurrentWeatherData _currentWeatherData;
 
@@ -15,8 +15,29 @@ class meteoService {
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
     var url = Uri.https("api.openweathermap.org", "/data/2.5/weather", {
-      // 'lat': '${_cityModel.lat}',
-      // 'lon': '${_cityModel.lon}',
+      'lat': '${_cityModel.lat}',
+      'lon': '${_cityModel.lon}',
+      'units': units,
+      'appid': 'e6f4a7d38ed14b86bb576f01ec00b341',
+      'lang': 'FR'
+    });
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      _currentWeatherData =
+          CurrentWeatherData.fromJson(jsonDecode(response.body));
+    }
+    return _currentWeatherData;
+  }
+
+    static Future<CurrentWeatherData> requestCurrentMeteoDataByName(
+      cityModel _cityModel, String? units) async {
+    late CurrentWeatherData _currentWeatherData;
+
+    units ??= "metric";
+// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+
+    var url = Uri.https("api.openweathermap.org", "/data/2.5/weather", {
       'q' : "${_cityModel.name}",
       'units': units,
       'appid': 'e6f4a7d38ed14b86bb576f01ec00b341',

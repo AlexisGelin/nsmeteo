@@ -21,7 +21,7 @@ class CurrentWeatherBuilderState extends State<CurrentWeatherBuilder> {
 
   @override
   void initState() {
-    cW = meteoService.requestCurrentMeteoData(city, "metric");
+    cW = meteoService.requestCurrentMeteoDataByGeoLoc(city, "metric");
     super.initState();
   }
 
