@@ -97,6 +97,7 @@ class _SecondScreenState extends State<SecondScreen> {
   SizedBox _BuildMenuAllCityApi() {
     return SizedBox(
       child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: cityListApi.length,
         itemBuilder: (BuildContext context, int index) {
@@ -120,6 +121,7 @@ class _SecondScreenState extends State<SecondScreen> {
           SizedBox(
             height: 355,
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               itemCount: cityList.length,
               padding: const EdgeInsets.symmetric(vertical: 16),
               itemBuilder: (BuildContext context, int index) {
@@ -195,7 +197,9 @@ class _SecondScreenState extends State<SecondScreen> {
                                         "${snapshot.data!.main!.tempMin!.round()}°",
                                     style:
                                         Theme.of(context).textTheme.bodyMedium),
-                                const BlockSmall(),
+                                SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
                                     "Max. " +
                                         "${snapshot.data!.main!.tempMax!.round()}°",

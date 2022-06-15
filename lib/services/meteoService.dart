@@ -18,6 +18,7 @@ class meteoService {
       'lat': '${_cityModel.lat}',
       'lon': '${_cityModel.lon}',
       'units': units,
+       'limit' : '3',
       'appid': 'e6f4a7d38ed14b86bb576f01ec00b341',
       'lang': 'FR'
     });
