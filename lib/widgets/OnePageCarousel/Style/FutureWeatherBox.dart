@@ -72,13 +72,6 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
               ),
               SizedBox(
                 height: 110,
-                // decoration: BoxDecoration(
-                //   border: Border(
-                //     top: BorderSide(
-                //         width: 1,
-                //         color: Theme.of(context).colorScheme.tertiary),
-                //   ),
-                // ),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: ListView.builder(
