@@ -8,7 +8,6 @@ import 'package:nsmeteo/services/meteoService.dart';
 import 'package:nsmeteo/widgets/ListCity.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../main.dart';
 import '../utils/Ui.dart';
 import 'CarouselPage.dart';
 import 'OnePageCarousel/Builder/CurrentWeatherBuilder.dart';

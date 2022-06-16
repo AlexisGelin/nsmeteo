@@ -62,8 +62,6 @@ class _SecondScreenState extends State<ListCity> {
               Text("NSMétéo", style: Theme.of(context).textTheme.titleLarge),
               const BlockSmall(),
               _BuildSearchBar(context),
-
-              // fait de ses 3 la une seul list avec des onglet genre Ville rechercher -> list Ville recament consulter -> list Vos Ville ->list
               _BuildMenuAllCityApi(),
               _BuildMenuAllCity(),
             ],
@@ -285,6 +283,7 @@ class _SecondScreenState extends State<ListCity> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildMenuOneCityNoDismiss(int index, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),

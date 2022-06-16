@@ -38,7 +38,7 @@ class _CarouselPageState extends State<CarouselPage> {
       if (_selectedIndex == 1) {
         _selectedIndex = 0;
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ListCity()));
+            context, MaterialPageRoute(builder: (context) => const ListCity()));
       }
     });
   }
@@ -64,14 +64,8 @@ class _CarouselPageState extends State<CarouselPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool enable;
-    // if (cityList.length == 0) {
-    //   cityList.add(cityModel("Paris", 48.8534, 2.3488, "country", "state"));
-    // }
     if (cityList.length < 2) {
-      enable = false;
     } else {
-      enable = true;
     }
     return Scaffold(
       body: Builder(
