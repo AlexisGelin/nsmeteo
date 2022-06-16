@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/utils/appTheme.dart';
 import 'package:nsmeteo/widgets/CarouselPage.dart';
-import 'package:nsmeteo/widgets/ListCity.dart';
 
 void main() {
   runApp(const MyApp());
