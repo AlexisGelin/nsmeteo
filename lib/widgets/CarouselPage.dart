@@ -48,7 +48,7 @@ class _CarouselPageState extends State<CarouselPage> {
   void initState() {
     super.initState();
     loadInitSlide();
-    
+
     cityList = [];
     Future.delayed(Duration.zero, () async {
       db = await myDB.initDatabase();
@@ -64,8 +64,7 @@ class _CarouselPageState extends State<CarouselPage> {
   Widget build(BuildContext context) {
     bool enable;
     // if (cityList.length == 0) {
-    //   cityList.add(cityModel("Paris", 5.2, 5.2, "country", "state"));
-    //   enable = false;
+    //   cityList.add(cityModel("Paris", 48.8534, 2.3488, "country", "state"));
     // }
     if (cityList.length < 2) {
       enable = false;
@@ -78,7 +77,7 @@ class _CarouselPageState extends State<CarouselPage> {
           final double height = MediaQuery.of(context).size.height;
           return CarouselSlider(
             options: CarouselOptions(
-              enableInfiniteScroll: enable,
+              enableInfiniteScroll: false,
               initialPage: initPage,
               height: height,
               viewportFraction: 1.0,

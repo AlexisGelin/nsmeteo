@@ -103,12 +103,8 @@ class _SecondScreenState extends State<SecondScreen> {
         shrinkWrap: true,
         itemCount: cityListApi.length,
         itemBuilder: (BuildContext context, int index) {
-          if (cityListApi.isNotEmpty) {
-            ///Une ligne avec une ville
-            return _BuildMenuOneCityApi(index, context);
-          } else {
-            return const Text("il n'y a pas de ville a afficher");
-          }
+          ///Une ligne avec une ville
+          return _BuildMenuOneCityApi(index, context);
         },
       ),
     );
@@ -128,12 +124,11 @@ class _SecondScreenState extends State<SecondScreen> {
               itemCount: cityList.length,
               padding: const EdgeInsets.symmetric(vertical: 16),
               itemBuilder: (BuildContext context, int index) {
-                if (cityList.isNotEmpty) {
-                  ///Une ligne avec une ville
+                ///Une ligne avec une ville
+                if (cityList.length > 1) {
                   return _BuildMenuOneCity(index, context);
-                } else {
-                  return const Text("il n'y a pas de ville a afficher");
                 }
+                return _BuildMenuOneCityNoDismiss(index, context);
               },
             ),
           ),
@@ -201,7 +196,9 @@ class _SecondScreenState extends State<SecondScreen> {
                                     "${snapshot.data!.main!.tempMin!.round()}°",
                                     style:
                                         Theme.of(context).textTheme.bodyMedium),
-                                const SizedBox(width: 10,),
+                                const SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
                                     "Max. "
                                     "${snapshot.data!.main!.tempMax!.round()}°",
@@ -305,6 +302,70 @@ class _SecondScreenState extends State<SecondScreen> {
               return const CircularProgressIndicator();
             },
           ),
+        ),
+      ),
+    );
+  }
+
+  Padding _BuildMenuOneCityNoDismiss(int index, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: Theme.of(context).colorScheme.primaryContainer,
+        ),
+        child: FutureBuilder<CurrentWeatherData>(
+          future: meteoService.requestCurrentMeteoDataByGeoLoc(
+              cityList[index], "metric"),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(cityList[index].name,
+                            style: Theme.of(context).textTheme.titleMedium),
+                        Text("${snapshot.data!.main!.temp!.round()}°",
+                            style: Theme.of(context).textTheme.titleMedium),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(cityList[index].country,
+                                style: Theme.of(context).textTheme.bodyMedium),
+                            Text(cityList[index].state,
+                                style: Theme.of(context).textTheme.bodySmall),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                "Min. "
+                                "${snapshot.data!.main!.tempMin!.round()}°",
+                                style: Theme.of(context).textTheme.bodyMedium),
+                            Text(
+                                "Max. "
+                                "${snapshot.data!.main!.tempMax!.round()}°",
+                                style: Theme.of(context).textTheme.bodyMedium),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }
+            return const CircularProgressIndicator();
+          },
         ),
       ),
     );
