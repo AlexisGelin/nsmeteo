@@ -107,7 +107,8 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                "${cWeatherData.visibility} m",
+              cWeatherData.visibility == 10000? "> ${cWeatherData.visibility} m" : "${cWeatherData.visibility} m"
+                ,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
