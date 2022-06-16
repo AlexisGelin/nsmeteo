@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
         children: [
           Text(
-            "n",
+            "N",
             style: TextStyle(
               fontFamily: 'DMSans',
               fontSize: 350,

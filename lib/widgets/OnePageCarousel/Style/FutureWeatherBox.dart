@@ -30,7 +30,6 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
       children: [
         _BuildPrevisionsHeureParHeure(context),
         _BuildPrevisionSurPlusieursJours(context),
-
       ],
     );
   }
@@ -81,7 +80,6 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                       String dtt;
                       double width = 50;
 
-
                       if (DateTime.parse("${fWeatherData.list![index].dtTxt}")
                               .hour <
                           10) {
@@ -92,7 +90,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                             "${DateTime.parse("${fWeatherData.list![index].dtTxt}").hour} h";
                       }
 
-                      if(index == 0) {
+                      if (index == 0) {
                         dtt = "Maintenant";
                         width = 100;
                       }
@@ -211,41 +209,44 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     SizedBox(
-                                      width: 50,
-                                      child: Text(
-                                        txt,
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                      width: MediaQuery.of(context).size.width/1.2,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: 50,
+                                            child: Text(
+                                              txt,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.topCenter,
+                                            child: Image(
+                                              image: AssetImage(
+                                                  "assets/images/meteoIcones/${MaxMinDay[index][3]}.png"),
+                                              width: 24,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 35,
+                                            child: Text(
+                                              "${MaxMinDay[index][0]} °",
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                          Text(
+                                            "${MaxMinDay[index][1]} °",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    const BlockSmall(),
-                                    const BlockSmall(),
-                                    Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Image(
-                                        image: AssetImage(
-                                            "assets/images/meteoIcones/${MaxMinDay[index][3]}.png"),
-                                        width: 24,
-                                      ),
-                                    ),
-                                    const BlockSmall(),
-                                    const BlockSmall(),
-                                    const BlockSmall(),
-                                    const BlockSmall(),
-                                    SizedBox(
-                                      width: 35,
-                                      child: Text(
-                                        "${MaxMinDay[index][0]} °",
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
-                                    ),
-                                    const BlockSmall(),
-                                    const BlockSmall(),
-                                    Text(
-                                      "${MaxMinDay[index][1]} °",
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 20),
                                     ),
                                   ],
                                 ),
@@ -265,5 +266,4 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
       ),
     );
   }
-  
 }
