@@ -39,33 +39,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 39, 39, 39),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
           child: Column(
-        children: const [
+        children: [
           Text(
             "n",
             style: TextStyle(
-                fontSize: 350,
-                color: Color.fromARGB(255, 255, 255, 255),
-                shadows: [
-                  Shadow(
-                      offset: Offset(-1, -1),
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                  Shadow(
-                      offset: Offset(1, -1),
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                  Shadow(
-                      offset: Offset(1, 1),
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                  Shadow(
-                      offset: Offset(-1, 1),
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                ]),
+              fontFamily: 'DMSans',
+              fontSize: 350,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
           CircularProgressIndicator(
-            color: Color.fromARGB(255, 54, 0, 201),
-            backgroundColor: Color.fromARGB(255, 219, 219, 219),
+            color: Theme.of(context).colorScheme.secondary,
+            backgroundColor: Theme.of(context).colorScheme.tertiary,
           ),
         ],
       )),
