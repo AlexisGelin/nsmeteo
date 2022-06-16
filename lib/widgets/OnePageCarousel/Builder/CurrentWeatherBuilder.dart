@@ -10,6 +10,7 @@ class CurrentWeatherBuilder extends StatefulWidget {
 
   @override
   State<CurrentWeatherBuilder> createState() =>
+      // ignore: no_logic_in_create_state
       CurrentWeatherBuilderState(city);
 }
 

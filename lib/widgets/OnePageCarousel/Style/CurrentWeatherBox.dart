@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/utils/Block.dart';
-
-
 
 class CurrentWeatherBox extends StatefulWidget {
   final CurrentWeatherData cWeatherData;
@@ -14,6 +10,7 @@ class CurrentWeatherBox extends StatefulWidget {
 
   @override
   State<CurrentWeatherBox> createState() =>
+      // ignore: no_logic_in_create_state
       CurrentWeatherBoxState(cWeatherData,cityName);
 }
 

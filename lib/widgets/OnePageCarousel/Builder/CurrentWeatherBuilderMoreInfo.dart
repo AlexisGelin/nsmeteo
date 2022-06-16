@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBoxMoreInfo.dart';
 
 class CurrentWeatherBuilderMoreInfo extends StatefulWidget {
@@ -11,6 +10,7 @@ class CurrentWeatherBuilderMoreInfo extends StatefulWidget {
 
   @override
   State<CurrentWeatherBuilderMoreInfo> createState() =>
+      // ignore: no_logic_in_create_state
       CurrentWeatherBuilderMoreInfoState(city);
 }
 

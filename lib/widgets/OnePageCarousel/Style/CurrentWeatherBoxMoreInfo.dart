@@ -1,4 +1,5 @@
-import 'dart:ffi';
+
+
 
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/Meteo.dart';
@@ -13,6 +14,7 @@ class CurrentWeatherBoxMoreInfo extends StatefulWidget {
 
   @override
   State<CurrentWeatherBoxMoreInfo> createState() =>
+      // ignore: no_logic_in_create_state
       CurrentWeatherBoxMoreInfoState(cWeatherData);
 }
 
@@ -35,11 +37,12 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
         _BuildLeverAndCoucher(context),
         _BuildHumiditeAndRessenti(context),
         _BuildVent(context),
-        BlockSmall(),
+        const BlockSmall(),
       ],
     );
   }
 
+    // ignore: non_constant_identifier_names
     Padding _BuildLeverAndCoucher(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -55,6 +58,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
   }
 
  
+ // ignore: non_constant_identifier_names
  Padding _BuildVisibiliteAndPression(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -68,6 +72,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
       ),
     );
   }
+  // ignore: non_constant_identifier_names
   Container _BuildVisibilite(BuildContext context) {
     return Container(
       height: 105,
@@ -112,6 +117,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Container _BuildPression(BuildContext context) {
     return Container(
       height: 105,
@@ -146,7 +152,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                "${cWeatherData.main!.pressure}" + " hPa",
+                "${cWeatherData.main!.pressure}" " hPa",
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
@@ -156,6 +162,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Container _BuildCoucher(BuildContext context) {
     return Container(
       height: 105,
@@ -200,6 +207,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Container _BuildLever(BuildContext context) {
     return Container(
       height: 105,
@@ -244,8 +252,8 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildVent(BuildContext context) {
-    num? dir = cWeatherData.wind!.deg;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Container(
@@ -282,7 +290,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(20),
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: Column(
                         children: [
@@ -317,12 +325,12 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20),
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width / 5,
                       child: Column(
                         children: [
                           Text(
-                            "${cWeatherData.wind!.speed}" + " kmh",
+                            "${cWeatherData.wind!.speed}" " kmh",
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ],
@@ -338,6 +346,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildHumiditeAndRessenti(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -352,6 +361,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Container _BuildHumidite(BuildContext context) {
     return Container(
       height: 105,
@@ -386,7 +396,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                "${cWeatherData.main!.humidity}" + " %",
+                "${cWeatherData.main!.humidity}" " %",
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
@@ -396,6 +406,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Container _BuildRessenti(BuildContext context) {
     return Container(
       height: 105,
@@ -430,7 +441,7 @@ class CurrentWeatherBoxMoreInfoState extends State<CurrentWeatherBoxMoreInfo> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                "${cWeatherData.main!.feelsLike!.round()}" + " °",
+                "${cWeatherData.main!.feelsLike!.round()}" " °",
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),

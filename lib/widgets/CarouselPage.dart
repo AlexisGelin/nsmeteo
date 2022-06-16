@@ -4,6 +4,7 @@ import 'package:nsmeteo/widgets/OnePageCarousel/CurrentPageBuilder.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import '../models/cityModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CarouselPage extends StatefulWidget {
   const CarouselPage({Key? key}) : super(key: key);
@@ -14,6 +15,21 @@ class CarouselPage extends StatefulWidget {
 
 class _CarouselPageState extends State<CarouselPage> {
   int _selectedIndex = 0;
+  int initPage = 0;
+
+  void loadInitSlide() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      initPage = (prefs.getInt('indexPage') ?? 0);
+    });
+  }
+
+  void saveIndex(int index) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setInt('indexPage', index);
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,6 +47,8 @@ class _CarouselPageState extends State<CarouselPage> {
   @override
   void initState() {
     super.initState();
+    loadInitSlide();
+    
     cityList = [];
     Future.delayed(Duration.zero, () async {
       db = await myDB.initDatabase();
@@ -49,7 +67,7 @@ class _CarouselPageState extends State<CarouselPage> {
     //   cityList.add(cityModel("Paris", 5.2, 5.2, "country", "state"));
     //   enable = false;
     // }
-   if (cityList.length < 2) {
+    if (cityList.length < 2) {
       enable = false;
     } else {
       enable = true;
@@ -61,9 +79,15 @@ class _CarouselPageState extends State<CarouselPage> {
           return CarouselSlider(
             options: CarouselOptions(
               enableInfiniteScroll: enable,
+              initialPage: initPage,
               height: height,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  saveIndex(index);
+                });
+              },
             ),
             items:
                 cityList.map((item) => CurrentPageBuilder(city: item)).toList(),
@@ -74,6 +98,7 @@ class _CarouselPageState extends State<CarouselPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Container _BuildBottomNavBar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(

@@ -10,6 +10,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/services/geoCodingService.dart';
 import 'package:nsmeteo/services/meteoService.dart';
+
 import 'models/Meteo.dart';
 
 void main() {
@@ -94,24 +95,26 @@ class _SecondScreenState extends State<SecondScreen> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   SizedBox _BuildMenuAllCityApi() {
     return SizedBox(
       child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: cityListApi.length,
         itemBuilder: (BuildContext context, int index) {
-          if (cityListApi.length > 0) {
+          if (cityListApi.isNotEmpty) {
             ///Une ligne avec une ville
             return _BuildMenuOneCityApi(index, context);
           } else {
-            return Text("il n'y a pas de ville a afficher");
+            return const Text("il n'y a pas de ville a afficher");
           }
         },
       ),
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildMenuAllCity() {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -121,15 +124,15 @@ class _SecondScreenState extends State<SecondScreen> {
           SizedBox(
             height: 355,
             child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: cityList.length,
               padding: const EdgeInsets.symmetric(vertical: 16),
               itemBuilder: (BuildContext context, int index) {
-                if (cityList.length > 0) {
+                if (cityList.isNotEmpty) {
                   ///Une ligne avec une ville
                   return _BuildMenuOneCity(index, context);
                 } else {
-                  return Text("il n'y a pas de ville a afficher");
+                  return const Text("il n'y a pas de ville a afficher");
                 }
               },
             ),
@@ -139,6 +142,7 @@ class _SecondScreenState extends State<SecondScreen> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildMenuOneCityApi(int index, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -165,7 +169,7 @@ class _SecondScreenState extends State<SecondScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
                         Row(
@@ -193,16 +197,14 @@ class _SecondScreenState extends State<SecondScreen> {
                             Row(
                               children: [
                                 Text(
-                                    "Min. " +
-                                        "${snapshot.data!.main!.tempMin!.round()}°",
+                                    "Min. "
+                                    "${snapshot.data!.main!.tempMin!.round()}°",
                                     style:
                                         Theme.of(context).textTheme.bodyMedium),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                const SizedBox(width: 10,),
                                 Text(
-                                    "Max. " +
-                                        "${snapshot.data!.main!.tempMax!.round()}°",
+                                    "Max. "
+                                    "${snapshot.data!.main!.tempMax!.round()}°",
                                     style:
                                         Theme.of(context).textTheme.bodyMedium),
                               ],
@@ -222,6 +224,7 @@ class _SecondScreenState extends State<SecondScreen> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildMenuOneCity(int index, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -242,81 +245,72 @@ class _SecondScreenState extends State<SecondScreen> {
             cityList.removeAt(index);
           });
         },
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        SelectPageBuilder(city: cityList[index], db: db)));
-          },
-          child: Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: Theme.of(context).colorScheme.primaryContainer,
-            ),
-            child: FutureBuilder<CurrentWeatherData>(
-              future: meteoService.requestCurrentMeteoDataByGeoLoc(
-                  cityList[index], "metric"),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(cityList[index].name,
-                                style: Theme.of(context).textTheme.titleMedium),
-                            Text("${snapshot.data!.main!.temp!.round()}°",
-                                style: Theme.of(context).textTheme.titleMedium),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(cityList[index].country,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                                Text(cityList[index].state,
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                    "Min. " +
-                                        "${snapshot.data!.main!.tempMin!.round()}°",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                                Text(
-                                    "Max. " +
-                                        "${snapshot.data!.main!.tempMax!.round()}°",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
+        child: Container(
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: Theme.of(context).colorScheme.primaryContainer,
+          ),
+          child: FutureBuilder<CurrentWeatherData>(
+            future: meteoService.requestCurrentMeteoDataByGeoLoc(
+                cityList[index], "metric"),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(cityList[index].name,
+                              style: Theme.of(context).textTheme.titleMedium),
+                          Text("${snapshot.data!.main!.temp!.round()}°",
+                              style: Theme.of(context).textTheme.titleMedium),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(cityList[index].country,
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
+                              Text(cityList[index].state,
+                                  style: Theme.of(context).textTheme.bodySmall),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                  "Min. "
+                                  "${snapshot.data!.main!.tempMin!.round()}°",
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
+                              Text(
+                                  "Max. "
+                                  "${snapshot.data!.main!.tempMax!.round()}°",
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }
+              return const CircularProgressIndicator();
+            },
           ),
         ),
       ),
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),

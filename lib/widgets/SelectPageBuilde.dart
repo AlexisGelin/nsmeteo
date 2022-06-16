@@ -1,9 +1,10 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../main.dart';
@@ -20,6 +21,7 @@ class SelectPageBuilder extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<SelectPageBuilder> createState() => SelectPageBuilderState(city, db);
 }
 
@@ -44,6 +46,7 @@ class SelectPageBuilderState extends State<SelectPageBuilder> {
           return Scaffold(
             appBar: AppBar(
               actions: <Widget>[
+                // ignore: deprecated_member_use
                 FlatButton(
                   textColor: Colors.white,
                   onPressed: () {
@@ -53,9 +56,9 @@ class SelectPageBuilderState extends State<SelectPageBuilder> {
                         MaterialPageRoute(
                             builder: (context) => const CarouselPage()));
                   },
-                  child: Text("Ajouter"),
                   shape:
-                      CircleBorder(side: BorderSide(color: Colors.transparent)),
+                      const CircleBorder(side: BorderSide(color: Colors.transparent)),
+                  child: const Text("Ajouter"),
                 ),
               ],
               backgroundColor: Theme.of(context).colorScheme.secondary,

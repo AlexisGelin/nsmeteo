@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: camel_case_types
 class geoCodingService {
   static Future<List<cityModel>> getCityData(String city) async {
     List<cityModel> cityModelsList = [];

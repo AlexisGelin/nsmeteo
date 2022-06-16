@@ -3,14 +3,16 @@ import 'package:intl/intl.dart';
 import 'package:nsmeteo/utils/Ui.dart';
 
 class TransformData {
+  // ignore: non_constant_identifier_names
   static List<List<dynamic>> MinMaxByDays(FutureWeatherData fWeatherData) {
     num currentDay = 0;
     String? currentDayTxt = "";
     List<int> tempDay = [];
     List<String> iconname = [];
+    // ignore: non_constant_identifier_names
     List<dynamic> MinMaxDay = [];
     List<List<dynamic>> result = [];
-    fWeatherData.list!.forEach((element) {
+    for (var element in fWeatherData.list!) {
       if (DateTime.parse("${element.dtTxt}").day == currentDay ||
           currentDay == 0) {
         tempDay.add(element.main!.temp!.round());
@@ -20,7 +22,7 @@ class TransformData {
         MinMaxDay.add(tempDay[0]);
         MinMaxDay.add(tempDay[tempDay.length - 1]);
         MinMaxDay.add(
-            DateFormat('EEEE').format(DateTime.parse("${currentDayTxt}")));
+            DateFormat('EEEE').format(DateTime.parse("$currentDayTxt")));
         MinMaxDay.add(getTheIcon(iconname));
         result.add(MinMaxDay);
         tempDay = [];
@@ -30,13 +32,13 @@ class TransformData {
       }
       currentDayTxt = element.dtTxt;
       currentDay = DateTime.parse("${element.dtTxt}").day;
-    });
+    }
     return result;
   }
 
   static String getTheIcon(List<String> myList) {
     String resp = "";
-    myList.forEach((element) {
+    for (var element in myList) {
       if (resp == "") {
         resp = element;
       } else {
@@ -73,10 +75,11 @@ class TransformData {
           }
         } else if (element == "sun.png") {}
       }
-    });
+    }
     return resp;
   }
 
+  // ignore: non_constant_identifier_names
   static String ConvertDayInFrench(String day) {
     String newday = "";
     switch (day) {

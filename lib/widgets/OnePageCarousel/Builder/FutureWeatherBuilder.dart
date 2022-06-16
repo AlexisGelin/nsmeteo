@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
-import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 
 import '../../../models/futureWeatherData.dart';
 import '../Style/FutureWeatherBox.dart';
@@ -12,6 +10,7 @@ class FutureWeatherBuilder extends StatefulWidget {
   const FutureWeatherBuilder({Key? key, required this.city}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<FutureWeatherBuilder> createState() => FutureWeatherBuilderState(city);
 }
 

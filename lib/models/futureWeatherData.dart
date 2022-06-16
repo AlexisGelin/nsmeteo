@@ -14,22 +14,22 @@ class FutureWeatherData {
     if (json['list'] != null) {
       list = <FutureWeaterList>[];
       json['list'].forEach((v) {
-        list!.add(new FutureWeaterList.fromJson(v));
+        list!.add(FutureWeaterList.fromJson(v));
       });
     }
-    city = json['city'] != null ? new FutureCity.fromJson(json['city']) : null;
+    city = json['city'] != null ? FutureCity.fromJson(json['city']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cod'] = this.cod;
-    data['message'] = this.message;
-    data['cnt'] = this.cnt;
-    if (this.list != null) {
-      data['list'] = this.list!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['cod'] = cod;
+    data['message'] = message;
+    data['cnt'] = cnt;
+    if (list != null) {
+      data['list'] = list!.map((v) => v.toJson()).toList();
     }
-    if (this.city != null) {
-      data['city'] = this.city!.toJson();
+    if (city != null) {
+      data['city'] = city!.toJson();
     }
     return data;
   }
@@ -60,45 +60,45 @@ class FutureWeaterList {
   FutureWeaterList.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
     main = json['main'] != null
-        ? new FutureMainWather.fromJson(json['main'])
+        ? FutureMainWather.fromJson(json['main'])
         : null;
     if (json['weather'] != null) {
       weather = <FutureWeather>[];
       json['weather'].forEach((v) {
-        weather!.add(new FutureWeather.fromJson(v));
+        weather!.add(FutureWeather.fromJson(v));
       });
     }
     clouds = json['clouds'] != null
-        ? new FutureClouds.fromJson(json['clouds'])
+        ? FutureClouds.fromJson(json['clouds'])
         : null;
-    wind = json['wind'] != null ? new FutureWind.fromJson(json['wind']) : null;
+    wind = json['wind'] != null ? FutureWind.fromJson(json['wind']) : null;
     visibility = json['visibility'];
     pop = json['pop'];
-    sys = json['sys'] != null ? new FutureSys.fromJson(json['sys']) : null;
+    sys = json['sys'] != null ? FutureSys.fromJson(json['sys']) : null;
     dtTxt = json['dt_txt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['dt'] = this.dt;
-    if (this.main != null) {
-      data['main'] = this.main!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['dt'] = dt;
+    if (main != null) {
+      data['main'] = main!.toJson();
     }
-    if (this.weather != null) {
-      data['weather'] = this.weather!.map((v) => v.toJson()).toList();
+    if (weather != null) {
+      data['weather'] = weather!.map((v) => v.toJson()).toList();
     }
-    if (this.clouds != null) {
-      data['clouds'] = this.clouds!.toJson();
+    if (clouds != null) {
+      data['clouds'] = clouds!.toJson();
     }
-    if (this.wind != null) {
-      data['wind'] = this.wind!.toJson();
+    if (wind != null) {
+      data['wind'] = wind!.toJson();
     }
-    data['visibility'] = this.visibility;
-    data['pop'] = this.pop;
-    if (this.sys != null) {
-      data['sys'] = this.sys!.toJson();
+    data['visibility'] = visibility;
+    data['pop'] = pop;
+    if (sys != null) {
+      data['sys'] = sys!.toJson();
     }
-    data['dt_txt'] = this.dtTxt;
+    data['dt_txt'] = dtTxt;
     return data;
   }
 }
@@ -138,16 +138,16 @@ class FutureMainWather {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['temp'] = this.temp;
-    data['feels_like'] = this.feelsLike;
-    data['temp_min'] = this.tempMin;
-    data['temp_max'] = this.tempMax;
-    data['pressure'] = this.pressure;
-    data['sea_level'] = this.seaLevel;
-    data['grnd_level'] = this.grndLevel;
-    data['humidity'] = this.humidity;
-    data['temp_kf'] = this.tempKf;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['temp'] = temp;
+    data['feels_like'] = feelsLike;
+    data['temp_min'] = tempMin;
+    data['temp_max'] = tempMax;
+    data['pressure'] = pressure;
+    data['sea_level'] = seaLevel;
+    data['grnd_level'] = grndLevel;
+    data['humidity'] = humidity;
+    data['temp_kf'] = tempKf;
     return data;
   }
 }
@@ -168,11 +168,11 @@ class FutureWeather {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['main'] = this.main;
-    data['description'] = this.description;
-    data['icon'] = this.icon;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['main'] = main;
+    data['description'] = description;
+    data['icon'] = icon;
     return data;
   }
 }
@@ -187,8 +187,8 @@ class FutureClouds {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['all'] = this.all;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['all'] = all;
     return data;
   }
 }
@@ -207,10 +207,10 @@ class FutureWind {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['speed'] = this.speed;
-    data['deg'] = this.deg;
-    data['gust'] = this.gust;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['speed'] = speed;
+    data['deg'] = deg;
+    data['gust'] = gust;
     return data;
   }
 }
@@ -225,8 +225,8 @@ class FutureSys {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pod'] = this.pod;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['pod'] = pod;
     return data;
   }
 }
@@ -255,7 +255,7 @@ class FutureCity {
     id = json['id'];
     name = json['name'];
     coord =
-        json['coord'] != null ? new FutureCoord.fromJson(json['coord']) : null;
+        json['coord'] != null ? FutureCoord.fromJson(json['coord']) : null;
     country = json['country'];
     population = json['population'];
     timezone = json['timezone'];
@@ -264,17 +264,17 @@ class FutureCity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    if (this.coord != null) {
-      data['coord'] = this.coord!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    if (coord != null) {
+      data['coord'] = coord!.toJson();
     }
-    data['country'] = this.country;
-    data['population'] = this.population;
-    data['timezone'] = this.timezone;
-    data['sunrise'] = this.sunrise;
-    data['sunset'] = this.sunset;
+    data['country'] = country;
+    data['population'] = population;
+    data['timezone'] = timezone;
+    data['sunrise'] = sunrise;
+    data['sunset'] = sunset;
     return data;
   }
 }
@@ -291,9 +291,9 @@ class FutureCoord {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lat'] = this.lat;
-    data['lon'] = this.lon;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['lat'] = lat;
+    data['lon'] = lon;
     return data;
   }
 }

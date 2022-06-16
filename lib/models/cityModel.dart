@@ -1,3 +1,4 @@
+// ignore: camel_case_types
 class cityModel {
   String name;
   num lat;

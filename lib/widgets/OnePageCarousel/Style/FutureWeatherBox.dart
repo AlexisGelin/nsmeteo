@@ -11,15 +11,17 @@ class FutureWeatherBox extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<FutureWeatherBox> createState() => FutureWeatherBoxState(fWeatherData);
 }
 
 class FutureWeatherBoxState extends State<FutureWeatherBox> {
   FutureWeatherData fWeatherData;
+  // ignore: non_constant_identifier_names
   late List<List<dynamic>> MaxMinDay;
 
   FutureWeatherBoxState(this.fWeatherData) {
-    this.MaxMinDay = TransformData.MinMaxByDays(fWeatherData);
+    MaxMinDay = TransformData.MinMaxByDays(fWeatherData);
   }
 
   @override
@@ -33,8 +35,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
     );
   }
 
-
-
+  // ignore: non_constant_identifier_names
   Padding _BuildPrevisionsHeureParHeure(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -122,7 +123,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
                                   alignment: Alignment.center,
                                   child: Image(
                                     image: AssetImage(
-                                        "assets/images/meteoIcones/${icons}.png"),
+                                        "assets/images/meteoIcones/$icons.png"),
                                     width: 24,
                                   ),
                                 ),
@@ -148,6 +149,7 @@ class FutureWeatherBoxState extends State<FutureWeatherBox> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Padding _BuildPrevisionSurPlusieursJours(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),

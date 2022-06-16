@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/services/meteoService.dart';
-import 'package:nsmeteo/widgets/OnePageCarousel/Style/CurrentWeatherBox.dart';
 import 'package:nsmeteo/widgets/OnePageCarousel/Builder/CurrentWeatherBuilderMoreInfo.dart';
 
 import '../../utils/Ui.dart';
@@ -14,6 +13,7 @@ class CurrentPageBuilder extends StatefulWidget {
   const CurrentPageBuilder({Key? key, required this.city}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<CurrentPageBuilder> createState() => CurrentPageBuilderState(city);
 }
 

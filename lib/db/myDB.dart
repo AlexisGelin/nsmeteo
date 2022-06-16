@@ -1,7 +1,8 @@
-import 'package:nsmeteo/models/cityModel.dart';
+import '../models/cityModel.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+// ignore: camel_case_types
 class myDB {
   static Future<Database> initDatabase() async {
     var databasesPath = await getDatabasesPath();
@@ -25,19 +26,19 @@ class myDB {
   static Future<List<cityModel>> getDB(Database db) async {
     List<cityModel> cityList = [];
     List<Map> list = await db.rawQuery('SELECT * FROM City');
-    list.forEach((element) {
+    for (var element in list) {
       cityList.add(cityModel(element["name"], element["lat"], element["lon"],
           element["country"], element["state"]));
-    });
+    }
 
     return cityList;
   }
 
-  static Future<void> insertDB(Database db, cityModel City) async {
+  static Future<void> insertDB(Database db, cityModel city) async {
     await db.transaction((txn) async {
       await txn.rawInsert(
           'INSERT INTO City(name, lat, lon, country, state) VALUES(?, ?, ?, ?, ?)',
-          [City.name, City.lat, City.lon, City.country, City.state]);
+          [city.name, city.lat, city.lon, city.country, city.state]);
     });
   }
 
