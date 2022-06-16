@@ -5,6 +5,7 @@ import 'package:nsmeteo/db/myDB.dart';
 import 'package:nsmeteo/models/cityModel.dart';
 import 'package:nsmeteo/models/Meteo.dart';
 import 'package:nsmeteo/services/meteoService.dart';
+import 'package:nsmeteo/widgets/ListCity.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../main.dart';
@@ -69,7 +70,7 @@ class SelectPageBuilderState extends State<SelectPageBuilder> {
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SecondScreen())),
+                        builder: (context) => const ListCity())),
               ),
             ),
             body: Container(
