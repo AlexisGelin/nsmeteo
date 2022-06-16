@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:nsmeteo/widgets/ListCity.dart';
 import 'package:nsmeteo/widgets/OnePageCarousel/CurrentPageBuilder.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nsmeteo/db/myDB.dart';
@@ -36,7 +37,8 @@ class _CarouselPageState extends State<CarouselPage> {
       _selectedIndex = index;
       if (_selectedIndex == 1) {
         _selectedIndex = 0;
-        Navigator.pushNamed(context, '/menu');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ListCity()));
       }
     });
   }
